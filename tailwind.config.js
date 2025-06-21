@@ -14,6 +14,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'admin': {
+                    'primary': '#201E43',    // Dark navy blue
+                    'secondary': '#134B70',  // Medium blue
+                    'accent': '#508C9B',     // Light blue/teal
+                    'light': '#EEEEEE',     // Light gray
+                },
+            },
         },
     },
 

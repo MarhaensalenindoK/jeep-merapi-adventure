@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Jalankan seeder untuk testing pagination
+        $this->call([
+            UserSeeder::class,
+            PackageCategorySeeder::class,
+            PackageSeeder::class,
+        ]);
     }
 }

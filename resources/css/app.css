@@ -1,3 +1,78 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for better accessibility and user-friendly design */
+@layer components {
+    /* Moderate text size for readability */
+    .admin-text-large {
+        @apply text-base;
+    }
+
+    /* High contrast buttons - reduced size */
+    .admin-btn-primary {
+        @apply bg-admin-primary hover:bg-admin-secondary text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-base;
+    }
+
+    .admin-btn-secondary {
+        @apply bg-admin-accent hover:bg-admin-secondary text-admin-primary font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-base;
+    }
+
+    /* Cards with better spacing */
+    .admin-card {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4;
+    }
+
+    /* Form inputs with moderate size */
+    .admin-input {
+        @apply block w-full px-3 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin-primary focus:border-admin-primary;
+    }
+
+    /* Better table styling */
+    .admin-table {
+        @apply min-w-full divide-y divide-gray-200;
+    }
+
+    .admin-table th {
+        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50;
+    }
+
+    .admin-table td {
+        @apply px-6 py-4 text-sm text-gray-900;
+    }
+
+    /* Status badges */
+    .admin-badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    }
+
+    .admin-badge-success {
+        @apply bg-green-100 text-green-800;
+    }
+
+    .admin-badge-warning {
+        @apply bg-yellow-100 text-yellow-800;
+    }
+
+    .admin-badge-danger {
+        @apply bg-red-100 text-red-800;
+    }
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
