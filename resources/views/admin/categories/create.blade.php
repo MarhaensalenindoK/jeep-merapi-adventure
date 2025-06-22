@@ -57,35 +57,23 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                <a href="{{ route('admin.categories.index') }}"
-                   class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-lg font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admin-primary transition-colors duration-200">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
+                <x-button variant="outline" icon="arrow-left" :href="route('admin.categories.index')">
                     Kembali
-                </a>
-                <button type="submit"
-                        class="admin-btn-primary">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                </x-button>
+
+                <x-button type="submit" variant="primary" icon="check">
                     Simpan Kategori
-                </button>
+                </x-button>
             </div>
         </form>
     </div>
 
     <!-- Help Section -->
-    <div class="admin-card mt-6 bg-admin-light border-admin-accent">
+    <x-alert type="info" class="mt-6">
         <div class="flex">
-            <div class="flex-shrink-0">
-                <svg class="w-6 h-6 text-admin-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            </div>
             <div class="ml-3">
-                <h3 class="text-lg font-semibold text-admin-primary">Tips:</h3>
-                <div class="mt-2 text-gray-700">
+                <h3 class="text-lg font-semibold text-blue-800">Tips:</h3>
+                <div class="mt-2 text-blue-700">
                     <ul class="list-disc list-inside space-y-1 text-base">
                         <li>Gunakan nama yang singkat dan mudah dipahami</li>
                         <li>Pastikan kategori tidak duplikat dengan yang sudah ada</li>
@@ -94,6 +82,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </x-alert>
 </div>
 @endsection
