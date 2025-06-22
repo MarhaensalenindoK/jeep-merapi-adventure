@@ -57,6 +57,49 @@
     .admin-badge-danger {
         @apply bg-red-100 text-red-800;
     }
+
+    /* Action buttons untuk tabel - digunakan manual untuk kemudahan maintain team */
+    .action-btn-base {
+        @apply inline-flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-offset-1 transition-colors duration-200 font-medium;
+    }
+
+    /* Action button size - icon only (untuk desktop table) */
+    .action-btn-icon {
+        @apply action-btn-base w-8 h-8;
+    }
+
+    /* Action button size - dengan text (untuk mobile card) */
+    .action-btn-text {
+        @apply action-btn-base px-3 py-2 text-sm;
+    }
+
+    /* Action button variants */
+    .action-btn-view {
+        @apply bg-green-100 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-green-500;
+    }
+
+    .action-btn-edit {
+        @apply bg-blue-100 text-blue-700 hover:bg-blue-200 hover:text-blue-800 focus:ring-blue-500;
+    }
+
+    .action-btn-delete {
+        @apply bg-red-100 text-red-700 hover:bg-red-200 hover:text-red-800 focus:ring-red-500;
+    }
+
+    /* Container untuk group action buttons */
+    .action-buttons-group {
+        @apply flex items-center;
+    }
+
+    /* Spacing untuk desktop table (icon only) */
+    .action-buttons-group.desktop {
+        @apply space-x-1 justify-end;
+    }
+
+    /* Spacing untuk mobile card (dengan text) */
+    .action-buttons-group.mobile {
+        @apply space-x-2;
+    }
 }
 
 /* Custom scrollbar for sidebar */

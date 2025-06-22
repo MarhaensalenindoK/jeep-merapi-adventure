@@ -36,19 +36,19 @@
             <div class="lg:col-span-2 space-y-6">
                 <!-- Basic Information -->
                 <div class="bg-gradient-to-r from-admin-secondary to-admin-accent p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-2">{{ $package->name }}</h3>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100">{{ $package->name }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                         <div>
                             <p class="text-gray-100 opacity-90">Kategori</p>
-                            <p class="font-semibold">{{ $package->category->name }}</p>
+                            <p class="font-semibold text-gray-100">{{ $package->category->name }}</p>
                         </div>
                         <div>
                             <p class="text-gray-100 opacity-90">Harga</p>
-                            <p class="font-semibold text-lg">Rp {{ number_format($package->price, 0, ',', '.') }}</p>
+                            <p class="font-semibold text-lg text-gray-100">Rp {{ number_format($package->price, 0, ',', '.') }}</p>
                         </div>
                         <div>
                             <p class="text-gray-100 opacity-90">Durasi</p>
-                            <p class="font-semibold">{{ $package->duration }}</p>
+                            <p class="font-semibold text-gray-100">{{ $package->duration }}</p>
                         </div>
                     </div>
                 </div>
