@@ -119,3 +119,62 @@
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
 }
+
+/* CKEditor styling fixes */
+/* Hide CKEditor powered by banner */
+.ck.ck-powered-by {
+    display: none !important;
+}
+.ck-powered-by {
+    display: none !important;
+}
+.ck.ck-balloon-panel .ck-powered-by {
+    display: none !important;
+}
+
+/* Fix for CKEditor lists styling in editor */
+.ck-content ol {
+    padding-left: 40px !important;
+    list-style-type: decimal !important;
+}
+.ck-content ul {
+    padding-left: 40px !important;
+    list-style-type: disc !important;
+}
+.ck-content ol li,
+.ck-content ul li {
+    display: list-item !important;
+    margin-left: 0 !important;
+    padding-left: 8px !important;
+}
+.ck-content ol li::marker,
+.ck-content ul li::marker {
+    color: #374151 !important;
+}
+
+/* Fix for displaying CKEditor content with proper list styling in show page */
+.prose ol {
+    padding-left: 40px !important;
+    list-style-type: decimal !important;
+}
+.prose ul {
+    padding-left: 40px !important;
+    list-style-type: disc !important;
+}
+.prose ol li,
+.prose ul li {
+    display: list-item !important;
+    margin-left: 0 !important;
+    padding-left: 8px !important;
+}
+.prose ol li::marker,
+.prose ul li::marker {
+    color: #374151 !important;
+}
+.prose blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 16px;
+    margin: 16px 0;
+    font-style: italic;
+    color: #6b7280;
+}

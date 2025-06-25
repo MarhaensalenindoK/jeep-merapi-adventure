@@ -15,7 +15,12 @@ class Gallery extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'title',
+        'description',
         'image_path',
+        'alt_text',
+        'sort_order',
+        'is_featured',
         'caption',
         'package_id',
         'created_by',

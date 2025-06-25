@@ -262,12 +262,23 @@ function initializeSelect2(selector, options = {}) {
 
 <script>
 $(document).ready(function() {
+    // Store the current selected value before initializing
+    var currentValue = $('#{{ $uniqueId }}').val();
+    var selectedValue = '{{ $selected }}';
+
     initializeSelect2('#{{ $uniqueId }}', {
         placeholder: '{{ $placeholder }}',
         @if(!$searchable)
         minimumResultsForSearch: Infinity,
         @endif
     });
+
+    // Set the selected value explicitly after initialization
+    if (selectedValue) {
+        $('#{{ $uniqueId }}').val(selectedValue).trigger('change');
+    } else if (currentValue) {
+        $('#{{ $uniqueId }}').val(currentValue).trigger('change');
+    }
 });
 </script>
 @endpush
