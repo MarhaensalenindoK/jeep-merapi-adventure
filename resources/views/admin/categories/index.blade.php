@@ -46,9 +46,9 @@
             </div>
             @if(request('search'))
                 <x-alert type="info" class="mb-4">
-                    <div class="flex items-center justify-between">
-                        <span>Menampilkan hasil pencarian untuk: <strong>"{{ request('search') }}"</strong></span>
-                        <a href="{{ route('admin.categories.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-left">Menampilkan hasil pencarian untuk: <strong>"{{ request('search') }}"</strong></span>
+                        <a href="{{ route('admin.categories.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium whitespace-nowrap">
                             Tampilkan semua
                         </a>
                     </div>

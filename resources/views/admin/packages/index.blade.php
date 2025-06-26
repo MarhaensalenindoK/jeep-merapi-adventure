@@ -105,8 +105,8 @@
             <!-- Search Info Banner -->
             @if(request()->anyFilled(['search', 'category', 'price_min', 'price_max']))
                 <x-alert type="info" class="mb-4">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center text-left">
                             <span class="text-sm">
                                 <strong>Filter aktif:</strong>
                                 @if(request('search'))
@@ -121,9 +121,9 @@
                                 @endif
                             </span>
                         </div>
-                        <x-button variant="ghost" size="sm" :href="route('admin.packages.index')">
-                            Hapus filter
-                        </x-button>
+                        <a href="{{ route('admin.packages.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium whitespace-nowrap">
+                            Tampilkan semua
+                        </a>
                     </div>
                 </x-alert>
             @endif

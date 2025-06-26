@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Detail Galeri')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Galeri', 'url' => route('admin.galleries.index')],
+        ['title' => 'Detail Galeri'],
+    ];
+@endphp
+
 @section('content')
 <main class="flex-1" x-data="{ showDeleteModal: false }">
     <div class="bg-white p-6 rounded-lg shadow-md">
@@ -24,17 +32,40 @@
             <div class="lg:col-span-2">
                 <div class="space-y-4">
                     <!-- Main Image -->
-                    <div class="relative group">
+                    <div class="relative group" x-data="{ showModal: false }">
                         @if($gallery->image_path)
                             <img src="{{ asset('storage/' . $gallery->image_path) }}"
                                  alt="{{ $gallery->alt_text ?? $gallery->title }}"
-                                 class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg bg-gray-50">
-                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-lg flex items-center justify-center">
-                                <a href="{{ asset('storage/' . $gallery->image_path) }}" target="_blank"
-                                   class="opacity-0 group-hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg font-medium transition-opacity shadow-lg">
-                                    <x-icon name="external-link" class="w-4 h-4 inline mr-2" />
-                                    Lihat Ukuran Penuh
-                                </a>
+                                 class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg bg-gray-50 cursor-pointer hover:opacity-90 transition-opacity"
+                                 @click="showModal = true">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-lg flex items-center justify-center pointer-events-none">
+                                <div class="opacity-0 group-hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg font-medium transition-opacity shadow-lg">
+                                    <x-icon name="search" class="w-4 h-4 inline mr-2" />
+                                    Klik untuk memperbesar
+                                </div>
+                            </div>
+
+                            <!-- Modal Full Image -->
+                            <div x-show="showModal"
+                                 x-transition:enter="ease-out duration-300"
+                                 x-transition:enter-start="opacity-0"
+                                 x-transition:enter-end="opacity-100"
+                                 x-transition:leave="ease-in duration-200"
+                                 x-transition:leave-start="opacity-100"
+                                 x-transition:leave-end="opacity-0"
+                                 class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-75 flex items-center justify-center p-4"
+                                 @click="showModal = false"
+                                 @keydown.escape.window="showModal = false">
+                                <div class="relative max-w-7xl max-h-full">
+                                    <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                         alt="{{ $gallery->alt_text ?? $gallery->title }}"
+                                         class="max-w-full max-h-full object-contain rounded-lg"
+                                         @click.stop>
+                                    <button @click="showModal = false"
+                                            class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-colors">
+                                        <x-icon name="close" class="w-6 h-6" />
+                                    </button>
+                                </div>
                             </div>
                         @else
                             <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -193,7 +224,7 @@
                     Hapus Galeri
                 </x-button>
             </form>
-            
+
             <x-button variant="outline" @click="showDeleteModal = false"
                       class="mt-3 inline-flex w-full justify-center sm:mt-0 sm:w-auto">
                 Batal

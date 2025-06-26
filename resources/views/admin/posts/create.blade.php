@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Tambah Artikel')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Blog', 'url' => route('admin.posts.index')],
+        ['title' => 'Tambah Artikel'],
+    ];
+@endphp
+
 @push('styles')
 <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 @endpush
@@ -38,7 +46,8 @@
             </ul>
         </x-alert>
 
-        <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" x-data="{}">
+        <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" x-data="{}"
+              onsubmit="return validateForm()">
             @csrf
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -148,7 +157,7 @@
                             </label>
                             <textarea id="body" name="body" rows="12"
                                       class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-admin-primary focus:border-admin-primary"
-                                      placeholder="Tulis konten artikel di sini..." required>{{ old('body') }}</textarea>
+                                      placeholder="Tulis konten artikel di sini...">{{ old('body') }}</textarea>
                             @error('body')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -257,45 +266,68 @@ document.addEventListener('alpine:init', () => {
     });
 });
 
-// Initialize CKEditor
-ClassicEditor
-    .create(document.querySelector('#body'), {
-        toolbar: {
-            items: [
-                'heading', '|',
-                'bold', 'italic', 'underline', '|',
-                'bulletedList', 'numberedList', '|',
-                'outdent', 'indent', '|',
-                'alignment', '|',
-                'link', 'blockQuote', '|',
-                'undo', 'redo'
-            ]
-        },
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
-            ]
-        },
-        alignment: {
-            options: ['left', 'center', 'right', 'justify']
-        },
-        ui: {
-            poweredBy: {
-                position: 'inside',
-                side: 'right',
-                label: null
-            }
+// Form validation function
+function validateForm() {
+    // Sync CKEditor content to textarea
+    if (window.bodyEditor) {
+        const content = window.bodyEditor.getData();
+        document.getElementById('body').value = content;
+
+        // Check if content is empty
+        if (!content.trim()) {
+            alert('Konten artikel tidak boleh kosong.');
+            return false;
         }
-    })
-    .then(editor => {
-        // Store editor instance for later use
-        window.bodyEditor = editor;
-    })
-    .catch(error => {
-        console.error('CKEditor error:', error);
-    });
+    }
+    return true;
+}
+
+// Initialize CKEditor when document is ready
+document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+        .create(document.querySelector('#body'), {
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'outdent', 'indent', '|',
+                    'alignment', '|',
+                    'link', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            },
+            heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                ]
+            },
+            alignment: {
+                options: ['left', 'center', 'right', 'justify']
+            },
+            ui: {
+                poweredBy: {
+                    position: 'inside',
+                    side: 'right',
+                    label: null
+                }
+            }
+        })
+        .then(editor => {
+            // Store editor instance for later use
+            window.bodyEditor = editor;
+
+            // Auto-sync content to textarea on change
+            editor.model.document.on('change:data', () => {
+                document.getElementById('body').value = editor.getData();
+            });
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+        });
+});
 </script>
 @endsection

@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Detail Artikel')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Blog', 'url' => route('admin.posts.index')],
+        ['title' => 'Detail Artikel'],
+    ];
+@endphp
+
 @section('content')
 <main class="flex-1">
     <div class="bg-white p-6 rounded-lg shadow-md">
@@ -81,12 +89,12 @@
                             </div>
                             <div class="flex items-center">
                                 <x-icon name="calendar" class="w-4 h-4 mr-1" />
-                                {{ $post->created_at->format('d M Y, H:i') }}
+                                {{ $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}
                             </div>
                             @if($post->published_at)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     <x-icon name="check" class="w-3 h-3 mr-1" />
-                                    Dipublikasi {{ $post->published_at->format('d M Y') }}
+                                    Dipublikasi {{ $post->published_at->setTimezone('Asia/Jakarta')->format('d M Y') }}
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -125,14 +133,14 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div>
                                 <span class="font-medium">Dibuat:</span>
-                                <div>{{ $post->created_at->format('d M Y, H:i') }}</div>
+                                <div>{{ $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}</div>
                                 @if($post->created_by && $post->createdByUser)
                                     <div class="text-xs">oleh {{ $post->createdByUser->name }}</div>
                                 @endif
                             </div>
                             <div>
                                 <span class="font-medium">Diubah:</span>
-                                <div>{{ $post->updated_at->format('d M Y, H:i') }}</div>
+                                <div>{{ $post->updated_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}</div>
                                 @if($post->updated_by && $post->updatedByUser)
                                     <div class="text-xs">oleh {{ $post->updatedByUser->name }}</div>
                                 @endif

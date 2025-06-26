@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - Admin Panel</title>
+    <title>@yield('title', 'Dashboard') - Jeep Merapi Adventure</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -83,14 +83,17 @@
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-admin-secondary/20">
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
-                            class="flex items-center w-full px-4 py-3 text-white rounded-lg hover:bg-admin-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-admin-accent">
+                            class="flex items-center w-full px-4 py-3 text-white rounded-lg hover:bg-admin-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-admin-accent"
+                            title="{{ Auth::user()->name }}">
                         <div class="w-8 h-8 bg-admin-accent rounded-full flex items-center justify-center mr-3">
                             <svg class="w-5 h-5 text-admin-primary" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
                         <div class="flex-1 text-left">
-                            <p class="text-base font-medium">{{ Auth::user()->name }}</p>
+                            <p class="text-base font-medium" title="{{ Auth::user()->name }}">
+                                {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => substr($word, 0, 1))->take(2)->join('')) }}
+                            </p>
                             <p class="text-sm text-gray-300">Administrator</p>
                         </div>
                         <svg class="w-5 h-5 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +168,30 @@
                             </h1>
                             @if(isset($breadcrumbs))
                                 <nav class="flex mt-2" aria-label="Breadcrumb">
-                                    <ol class="flex items-center space-x-4">
+                                    <!-- Mobile Breadcrumb -->
+                                    <ol class="flex items-center space-x-2 sm:hidden">
+                                        @foreach($breadcrumbs as $breadcrumb)
+                                            <li>
+                                                <div class="flex items-center">
+                                                    @if(!$loop->first)
+                                                        <svg class="flex-shrink-0 h-4 w-4 text-gray-300 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                                        </svg>
+                                                    @endif
+                                                    @if(isset($breadcrumb['url']))
+                                                        <a href="{{ $breadcrumb['url'] }}" class="text-sm text-gray-500 hover:text-gray-700 {{ $loop->count > 2 && !$loop->last && !$loop->first ? 'hidden' : '' }}">
+                                                            {{ $loop->count > 2 && !$loop->last && !$loop->first ? '...' : Str::limit($breadcrumb['title'], 10) }}
+                                                        </a>
+                                                    @else
+                                                        <span class="text-sm text-gray-500">{{ Str::limit($breadcrumb['title'], 15) }}</span>
+                                                    @endif
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ol>
+
+                                    <!-- Desktop Breadcrumb -->
+                                    <ol class="hidden sm:flex items-center space-x-4">
                                         @foreach($breadcrumbs as $breadcrumb)
                                             <li>
                                                 <div class="flex items-center">

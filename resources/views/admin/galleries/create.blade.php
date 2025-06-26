@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Tambah Galeri')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Galeri', 'url' => route('admin.galleries.index')],
+        ['title' => 'Tambah Galeri'],
+    ];
+@endphp
+
 @section('content')
 <main class="flex-1">
     <div class="bg-white p-6 rounded-lg shadow-md">
