@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Tambah Paket Wisata')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Paket', 'url' => route('admin.packages.index')],
+        ['title' => 'Tambah Paket'],
+    ];
+@endphp
+
 @push('styles')
 <!-- Select2 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

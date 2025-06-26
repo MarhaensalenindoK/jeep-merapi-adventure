@@ -1,5 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Detail Paket Wisata')
+
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Paket', 'url' => route('admin.packages.index')],
+        ['title' => 'Detail Paket'],
+    ];
+@endphp
+
 @section('content')
 <main class="flex-1 p-6">
     <div class="bg-white p-6 rounded-lg shadow-md">

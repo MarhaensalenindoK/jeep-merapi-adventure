@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 @section('title', 'Edit Galeri')
 
+@php
+    $breadcrumbs = [
+        ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['title' => 'Manajemen Galeri', 'url' => route('admin.galleries.index')],
+        ['title' => 'Edit Galeri'],
+    ];
+@endphp
+
 @section('content')
 <main class="flex-1">
     <div class="bg-white p-6 rounded-lg shadow-md">
@@ -48,16 +56,39 @@
                                 Gambar Saat Ini
                             </label>
                             @if($gallery->image_path)
-                                <div class="relative">
+                                <div class="relative" x-data="{ showModal: false }">
                                     <img src="{{ asset('storage/' . $gallery->image_path) }}"
                                          alt="{{ $gallery->alt_text ?? $gallery->title }}"
-                                         class="w-full h-64 object-cover rounded-lg shadow-sm">
-                                    <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
-                                        <a href="{{ asset('storage/' . $gallery->image_path) }}" target="_blank"
-                                           class="opacity-0 hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-opacity shadow-lg">
-                                            <x-icon name="external-link" class="w-4 h-4 inline mr-2" />
-                                            Lihat Ukuran Penuh
-                                        </a>
+                                         class="w-full h-64 object-cover rounded-lg shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
+                                         @click="showModal = true">
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center pointer-events-none">
+                                        <div class="opacity-0 hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-opacity shadow-lg">
+                                            <x-icon name="search" class="w-4 h-4 inline mr-2" />
+                                            Klik untuk memperbesar
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal Full Image -->
+                                    <div x-show="showModal"
+                                         x-transition:enter="ease-out duration-300"
+                                         x-transition:enter-start="opacity-0"
+                                         x-transition:enter-end="opacity-100"
+                                         x-transition:leave="ease-in duration-200"
+                                         x-transition:leave-start="opacity-100"
+                                         x-transition:leave-end="opacity-0"
+                                         class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-75 flex items-center justify-center p-4"
+                                         @click="showModal = false"
+                                         @keydown.escape.window="showModal = false">
+                                        <div class="relative max-w-7xl max-h-full">
+                                            <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                                 alt="{{ $gallery->alt_text ?? $gallery->title }}"
+                                                 class="max-w-full max-h-full object-contain rounded-lg"
+                                                 @click.stop>
+                                            <button @click="showModal = false"
+                                                    class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-colors">
+                                                <x-icon name="close" class="w-6 h-6" />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             @else
