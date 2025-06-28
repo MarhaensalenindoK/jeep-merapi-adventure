@@ -18,8 +18,10 @@ class Post extends Model
         'user_id', // Penulis artikel
         'title',
         'slug',
+        'excerpt',
         'body',
         'featured_image',
+        'is_published',
         'published_at',
         'created_by',
         'updated_by',
@@ -31,6 +33,7 @@ class Post extends Model
      * @var array<string, string>
      */
     protected $casts = [
+        'is_published' => 'boolean',
         'published_at' => 'datetime',
     ];
 
@@ -56,5 +59,15 @@ class Post extends Model
     public function updatedByUser()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
