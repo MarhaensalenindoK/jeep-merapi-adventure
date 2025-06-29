@@ -90,7 +90,7 @@
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
                             </svg>
-                            {{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}
+                            {{ $post->updated_at->format('d M Y') }}
                             @if($post->author)
                             <span class="mx-2">•</span>
                             <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -142,21 +142,8 @@
             @if($posts->hasPages())
             <div class="mt-12">
                 <!-- Pagination Links -->
-                <div class="flex justify-center">
+                <div>
                     {{ $posts->appends(request()->query())->links() }}
-                </div>
-
-                <!-- Pagination Info -->
-                <div class="mt-4 text-center">
-                    <p class="text-sm text-gray-700">
-                        Menampilkan
-                        <span class="font-medium">{{ $posts->firstItem() }}</span>
-                        sampai
-                        <span class="font-medium">{{ $posts->lastItem() }}</span>
-                        dari
-                        <span class="font-medium">{{ $posts->total() }}</span>
-                        artikel
-                    </p>
                 </div>
             </div>
             @endif
@@ -212,7 +199,7 @@
                    class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors">
                     Lihat Paket Wisata
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20mendapatkan%20info%20update%20terbaru%20dari%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20ingin%20mendapatkan%20info%20update%20terbaru%20dari%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-lg font-bold transition-colors">
                     Subscribe via WhatsApp

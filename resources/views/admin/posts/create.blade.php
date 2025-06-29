@@ -174,29 +174,10 @@
                                            class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded"
                                            {{ old('is_published') ? 'checked' : '' }}>
                                     <label for="is_published" class="ml-2 block text-sm text-gray-700">
-                                        Publikasikan artikel sekarang
+                                        Publikasikan artikel
                                     </label>
                                 </div>
-
-                                <!-- Custom Publish Date -->
-                                <div x-data="{ showCustomDate: false }">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" id="custom_date" @change="showCustomDate = !showCustomDate"
-                                               class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded">
-                                        <label for="custom_date" class="ml-2 block text-sm text-gray-700">
-                                            Atur tanggal publikasi manual
-                                        </label>
-                                    </div>
-
-                                    <div x-show="showCustomDate" class="mt-2">
-                                        <input type="datetime-local" id="published_at" name="published_at"
-                                               class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-admin-primary focus:border-admin-primary"
-                                               value="{{ old('published_at') }}">
-                                        @error('published_at')
-                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
+                                <p class="text-sm text-gray-500">Centang untuk mempublikasikan artikel di halaman blog</p>
                             </div>
                         </div>
                     </div>

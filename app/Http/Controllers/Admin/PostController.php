@@ -41,9 +41,9 @@ class PostController extends Controller
         // Filter by status
         if ($request->filled('status')) {
             if ($request->status === 'published') {
-                $query->whereNotNull('published_at');
+                $query->where('is_published', true);
             } elseif ($request->status === 'draft') {
-                $query->whereNull('published_at');
+                $query->where('is_published', false);
             }
         }
 
@@ -51,7 +51,7 @@ class PostController extends Controller
         $sortField = $request->get('sort', 'created_at');
         $sortDirection = $request->get('direction', 'desc');
 
-        $allowedSortFields = ['title', 'created_at', 'published_at', 'updated_at'];
+        $allowedSortFields = ['title', 'created_at', 'updated_at'];
         if (in_array($sortField, $allowedSortFields)) {
             $query->orderBy($sortField, $sortDirection);
         } else {
@@ -86,7 +86,6 @@ class PostController extends Controller
             'body' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:15360', // 15MB
-            'published_at' => 'nullable|date',
             'is_published' => 'boolean',
         ]);
 
@@ -103,13 +102,6 @@ class PostController extends Controller
         while (Post::where('slug', $validated['slug'])->exists()) {
             $validated['slug'] = $originalSlug . '-' . $counter;
             $counter++;
-        }
-
-        // Handle published_at
-        if ($request->boolean('is_published') && !$request->filled('published_at')) {
-            $validated['published_at'] = now();
-        } elseif (!$request->boolean('is_published')) {
-            $validated['published_at'] = null;
         }
 
         // Handle featured image upload
@@ -178,7 +170,6 @@ class PostController extends Controller
             'body' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:15360', // 15MB
-            'published_at' => 'nullable|date',
             'is_published' => 'boolean',
         ]);
 
@@ -195,13 +186,6 @@ class PostController extends Controller
         while (Post::where('slug', $validated['slug'])->where('id', '!=', $post->id)->exists()) {
             $validated['slug'] = $originalSlug . '-' . $counter;
             $counter++;
-        }
-
-        // Handle published_at
-        if ($request->boolean('is_published') && !$request->filled('published_at')) {
-            $validated['published_at'] = $post->published_at ?? now();
-        } elseif (!$request->boolean('is_published')) {
-            $validated['published_at'] = null;
         }
 
         // Handle featured image upload

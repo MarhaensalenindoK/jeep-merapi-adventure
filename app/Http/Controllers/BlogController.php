@@ -24,7 +24,7 @@ class BlogController extends Controller
             });
         }
 
-        $posts = $query->orderBy('published_at', 'desc')->paginate(10);
+        $posts = $query->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('public.blog.index', compact('posts'));
     }
@@ -42,7 +42,7 @@ class BlogController extends Controller
         // Artikel terkait
         $relatedPosts = Post::where('is_published', true)
             ->where('id', '!=', $post->id)
-            ->orderBy('published_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->take(3)
             ->get();
 

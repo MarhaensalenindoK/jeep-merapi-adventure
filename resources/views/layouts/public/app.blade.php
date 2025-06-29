@@ -24,7 +24,7 @@
     <meta property="twitter:image" content="@yield('og_image', asset('images/default-og.jpg'))">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -72,7 +72,7 @@
 
     <!-- WhatsApp Float Button -->
     <div class="fixed bottom-6 right-6 z-50">
-        <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+        <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
            target="_blank"
            class="relative bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 group flex items-center justify-center">
             <!-- WhatsApp Logo -->

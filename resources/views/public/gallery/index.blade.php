@@ -115,21 +115,8 @@
         @if($galleries->hasPages())
         <div class="mt-12">
             <!-- Pagination Links -->
-            <div class="flex justify-center">
+            <div>
                 {{ $galleries->appends(request()->query())->links() }}
-            </div>
-
-            <!-- Pagination Info -->
-            <div class="mt-4 text-center">
-                <p class="text-sm text-gray-700">
-                    Menampilkan
-                    <span class="font-medium">{{ $galleries->firstItem() }}</span>
-                    sampai
-                    <span class="font-medium">{{ $galleries->lastItem() }}</span>
-                    dari
-                    <span class="font-medium">{{ $galleries->total() }}</span>
-                    foto
-                </p>
             </div>
         </div>
         @endif

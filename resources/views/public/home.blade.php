@@ -60,7 +60,7 @@
                     </svg>
                     Lihat Paket Tour
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -108,7 +108,7 @@
             <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
                 <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
                     <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
                     </svg>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Profesional</h3>
@@ -276,7 +276,7 @@
             Hubungi kami sekarang dan wujudkan petualangan impian Anda!
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
-            <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+            <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                target="_blank"
                class="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">

@@ -82,20 +82,24 @@ class PackageController extends Controller
         $request->validate([
             'package_category_id' => 'required|exists:package_categories,id',
             'name' => 'required|string|max:255|unique:packages,name',
+            'description' => 'nullable|string',
             'price' => 'required|integer|min:0',
             'duration' => 'required|string|max:255',
             'routes' => 'required|string',
             'full_description' => 'nullable|string',
+            'is_active' => 'boolean',
         ]);
 
         $package = Package::create([
             'package_category_id' => $request->package_category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'description' => $request->description,
             'price' => $request->price,
             'duration' => $request->duration,
             'routes' => $request->routes,
             'full_description' => $request->full_description,
+            'is_active' => $request->boolean('is_active'),
             'created_by' => Auth::id(),
             'updated_by' => Auth::id(),
         ]);
@@ -130,20 +134,24 @@ class PackageController extends Controller
         $request->validate([
             'package_category_id' => 'required|exists:package_categories,id',
             'name' => 'required|string|max:255|unique:packages,name,' . $package->id,
+            'description' => 'nullable|string',
             'price' => 'required|integer|min:0',
             'duration' => 'required|string|max:255',
             'routes' => 'required|string',
             'full_description' => 'nullable|string',
+            'is_active' => 'boolean',
         ]);
 
         $package->update([
             'package_category_id' => $request->package_category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'description' => $request->description,
             'price' => $request->price,
             'duration' => $request->duration,
             'routes' => $request->routes,
             'full_description' => $request->full_description,
+            'is_active' => $request->boolean('is_active'),
             'updated_by' => Auth::id(),
         ]);
 
