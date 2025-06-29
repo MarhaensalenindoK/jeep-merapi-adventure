@@ -55,6 +55,19 @@
                 <p class="mt-2 text-sm text-gray-500">Deskripsi opsional untuk menjelaskan kategori ini</p>
             </div>
 
+            <!-- Is Active -->
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="is_active" name="is_active" value="1"
+                           class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded"
+                           {{ old('is_active', true) ? 'checked' : '' }}>
+                    <label for="is_active" class="ml-2 block text-sm font-medium text-gray-700">
+                        Kategori Aktif
+                    </label>
+                </div>
+                <p class="text-sm text-gray-500">Centang untuk mengaktifkan kategori di halaman publik</p>
+            </div>
+
             <!-- Action Buttons -->
             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                 <x-button variant="outline" icon="arrow-left" :href="route('admin.categories.index')">

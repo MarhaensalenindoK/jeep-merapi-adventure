@@ -37,7 +37,7 @@ class HomeController extends Controller
         }
 
         $latestPosts = Post::where('is_published', true)
-            ->orderBy('published_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->take(3)
             ->get();
 

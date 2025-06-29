@@ -91,10 +91,10 @@
                                 <x-icon name="calendar" class="w-4 h-4 mr-1" />
                                 {{ $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}
                             </div>
-                            @if($post->published_at)
+                            @if($post->is_published)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     <x-icon name="check" class="w-3 h-3 mr-1" />
-                                    Dipublikasi {{ $post->published_at->setTimezone('Asia/Jakarta')->format('d M Y') }}
+                                    Dipublikasi {{ $post->updated_at->setTimezone('Asia/Jakarta')->format('d M Y') }}
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -122,7 +122,7 @@
                     <!-- Content -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Konten Artikel</label>
-                        <div class="bg-gray-50 rounded-lg p-4 prose prose-sm max-w-none">
+                        <div class="bg-gray-50 rounded-lg p-4 ckeditor-content">
                             {!! $post->body !!}
                         </div>
                     </div>

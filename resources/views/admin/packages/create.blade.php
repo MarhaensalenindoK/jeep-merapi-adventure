@@ -247,12 +247,65 @@
                     </div>
 
                     <!-- Preview Slug -->
-                    <div x-show="name.length > 0">
-                        <label class="block text-sm font-medium text-gray-500 mb-2">Preview Slug:</label>
-                        <div class="px-4 py-2 bg-gray-100 rounded-lg text-sm text-gray-600 border-2 border-dashed border-gray-300"
-                             x-text="generateSlug()"></div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Slug (Auto-generated)
+                        </label>
+                        <div class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-600 text-sm"
+                             x-text="name ? generateSlug() : 'slug-akan-dibuat-otomatis'">
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">URL-friendly version dari nama paket</p>
                     </div>
 
+                    <!-- Short Description -->
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                            Deskripsi Singkat
+                        </label>
+                        <textarea name="description" id="description-editor" rows="3"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
+                                  placeholder="Deskripsi singkat paket wisata (optional)">{{ old('description') }}</textarea>
+                        <p class="text-sm text-gray-500 mt-1">Deskripsi singkat untuk preview di halaman paket</p>
+                    </div>
+
+                    <!-- Routes -->
+                    <div>
+                        <label for="routes" class="block text-sm font-medium text-gray-700 mb-2">
+                            Rute Perjalanan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="routes" id="routes-editor" rows="4"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
+                                  placeholder="Rute perjalanan dan itinerary paket wisata" required>{{ old('routes') }}</textarea>
+                        <p class="text-sm text-gray-500 mt-1">Detail rute dan jadwal perjalanan</p>
+                    </div>
+
+                    <!-- Full Description -->
+                    <div>
+                        <label for="full_description" class="block text-sm font-medium text-gray-700 mb-2">
+                            Deskripsi Lengkap
+                        </label>
+                        <textarea name="full_description" id="full-description-editor" rows="6"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
+                                  placeholder="Deskripsi lengkap paket wisata dengan detail fasilitas dan informasi tambahan">{{ old('full_description') }}</textarea>
+                        <p class="text-sm text-gray-500 mt-1">Deskripsi detail untuk halaman lengkap paket</p>
+                    </div>
+
+                    <!-- Is Active -->
+                    <div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="is_active" name="is_active" value="1"
+                                   class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded"
+                                   {{ old('is_active', true) ? 'checked' : '' }}>
+                            <label for="is_active" class="ml-2 block text-sm text-gray-700">
+                                Paket Aktif
+                            </label>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Centang untuk mengaktifkan paket di halaman publik</p>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-4">
                     <!-- Harga -->
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
@@ -292,29 +345,6 @@
                                placeholder="Contoh: 2 Hari 1 Malam" required>
                     </div>
                 </div>
-
-                <!-- Right Column -->
-                <div class="space-y-4">
-                    <!-- Rute Perjalanan -->
-                    <div>
-                        <label for="routes" class="block text-sm font-medium text-gray-700 mb-2">
-                            Rute Perjalanan <span class="text-red-500">*</span>
-                        </label>
-                        <textarea name="routes" id="routes" rows="4"
-                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Deskripsikan rute perjalanan..." required>{{ old('routes') }}</textarea>
-                    </div>
-
-                    <!-- Deskripsi Lengkap -->
-                    <div>
-                        <label for="full_description" class="block text-sm font-medium text-gray-700 mb-2">
-                            Deskripsi Lengkap
-                        </label>
-                        <textarea name="full_description" id="full_description" rows="6"
-                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Deskripsi detail paket wisata...">{{ old('full_description') }}</textarea>
-                    </div>
-                </div>
             </div>
 
             <!-- Action Buttons -->
@@ -335,10 +365,40 @@
 </main>
 
 @push('scripts')
+<!-- CKEditor CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
+    // Initialize CKEditor for description
+    ClassicEditor
+        .create(document.querySelector('#description-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing description editor:', error);
+        });
+
+    // Initialize CKEditor for routes
+    ClassicEditor
+        .create(document.querySelector('#routes-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing routes editor:', error);
+        });
+
+    // Initialize CKEditor for full_description
+    ClassicEditor
+        .create(document.querySelector('#full-description-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing full description editor:', error);
+        });
+
     // Initialize Select2 for category
     $('.select2-category').select2({
         placeholder: 'Pilih Kategori',

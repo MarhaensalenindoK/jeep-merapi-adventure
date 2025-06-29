@@ -53,7 +53,7 @@
 
             <!-- CTA Button -->
             <div class="hidden md:block">
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@
                     Kontak
                 </a>
                 <div class="pt-4 pb-3 border-t border-gray-200">
-                    <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                    <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                        target="_blank"
                        class="bg-green-600 hover:bg-green-700 text-white block px-3 py-2 text-base font-medium rounded-lg mx-3 text-center">
                         Hubungi Kami via WhatsApp

@@ -201,33 +201,16 @@
                                 <div class="flex items-center">
                                     <input type="checkbox" id="is_published" name="is_published" value="1"
                                            class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded"
-                                           {{ old('is_published', $post->published_at ? 1 : 0) ? 'checked' : '' }}>
+                                           {{ old('is_published', $post->is_published ? 1 : 0) ? 'checked' : '' }}>
                                     <label for="is_published" class="ml-2 block text-sm text-gray-700">
                                         Publikasikan artikel
                                     </label>
                                 </div>
 
-                                <!-- Custom Publish Date -->
-                                <div x-data="{ showCustomDate: {{ old('published_at', $post->published_at) ? 'true' : 'false' }} }">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" id="custom_date"
-                                               @change="showCustomDate = !showCustomDate"
-                                               :checked="showCustomDate"
-                                               class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded">
-                                        <label for="custom_date" class="ml-2 block text-sm text-gray-700">
-                                            Atur tanggal publikasi manual
-                                        </label>
-                                    </div>
-
-                                    <div x-show="showCustomDate" class="mt-2">
-                                        <input type="datetime-local" id="published_at" name="published_at"
-                                               class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-admin-primary focus:border-admin-primary"
-                                               value="{{ old('published_at', $post->published_at ? $post->published_at->format('Y-m-d\TH:i') : '') }}">
-                                        @error('published_at')
-                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
+                                <p class="text-xs text-gray-500">
+                                    <x-icon name="information-circle" class="w-4 h-4 inline mr-1" />
+                                    Artikel yang dipublikasi akan langsung tampil di halaman blog. Tanggal publikasi akan menggunakan waktu terakhir diupdate.
+                                </p>
                             </div>
                         </div>
 

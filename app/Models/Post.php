@@ -22,7 +22,6 @@ class Post extends Model
         'body',
         'featured_image',
         'is_published',
-        'published_at',
         'created_by',
         'updated_by',
     ];
@@ -34,7 +33,6 @@ class Post extends Model
      */
     protected $casts = [
         'is_published' => 'boolean',
-        'published_at' => 'datetime',
     ];
 
     /**

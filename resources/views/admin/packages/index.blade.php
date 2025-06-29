@@ -157,7 +157,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div>
                                 <div class="font-semibold text-sm text-gray-900">{{ $package->name }}</div>
-                                <div class="text-xs text-gray-500 mt-1">{{ Str::limit($package->routes, 50) }}</div>
+                                <div class="text-xs text-gray-500 mt-1">{{ Str::limit(strip_tags($package->description ?? $package->routes ?? ''), 50) }}</div>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -213,7 +213,7 @@
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{ $package->category->name }}</span>
                     </div>
 
-                    <div class="text-sm text-gray-600 mb-3">{{ Str::limit($package->routes, 80) }}</div>
+                    <div class="text-sm text-gray-600 mb-3">{{ Str::limit(strip_tags($package->description ?? $package->routes ?? ''), 80) }}</div>
 
                     <div class="grid grid-cols-2 gap-4 text-sm mb-4">
                         <div>

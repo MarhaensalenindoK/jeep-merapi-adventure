@@ -10,7 +10,39 @@
 @endphp
 
 @section('content')
-<main class="flex-1 p-6">
+<main class="flex-1 p-6" x-data="{
+    currentImageIndex: 0,
+    showModal: false,
+    images: [
+        @if($package->galleries && $package->galleries->count() > 0)
+            @foreach($package->galleries as $gallery)
+                @if(file_exists(public_path('storage/' . $gallery->image_path)))
+                {
+                    src: '{{ asset('storage/' . $gallery->image_path) }}',
+                    alt: '{{ $gallery->alt_text ?? $gallery->title }}',
+                    title: '{{ $gallery->title }}',
+                    package: '{{ $package->name }}'
+                },
+                @endif
+            @endforeach
+        @endif
+    ],
+    openModal(index) {
+        this.currentImageIndex = index;
+        this.showModal = true;
+        document.body.style.overflow = 'hidden';
+    },
+    closeModal() {
+        this.showModal = false;
+        document.body.style.overflow = 'auto';
+    },
+    nextImage() {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    },
+    prevImage() {
+        this.currentImageIndex = this.currentImageIndex === 0 ? this.images.length - 1 : this.currentImageIndex - 1;
+    }
+}" @keydown.escape.window="closeModal()" @keydown.arrow-left.window="showModal && prevImage()" @keydown.arrow-right.window="showModal && nextImage()">
     <div class="bg-white p-6 rounded-lg shadow-md">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
             <h2 class="text-lg font-bold text-gray-900 mb-4 md:mb-0">Detail Paket: {{ $package->name }}</h2>
@@ -65,8 +97,8 @@
                 <!-- Rute Perjalanan -->
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <h4 class="text-lg font-semibold text-gray-900 mb-3">Rute Perjalanan</h4>
-                    <div class="prose max-w-none">
-                        <p class="text-gray-700 whitespace-pre-line">{{ $package->routes }}</p>
+                    <div class="ckeditor-content">
+                        {!! $package->routes !!}
                     </div>
                 </div>
 
@@ -74,8 +106,8 @@
                 @if($package->full_description)
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <h4 class="text-lg font-semibold text-gray-900 mb-3">Deskripsi Lengkap</h4>
-                    <div class="prose max-w-none">
-                        <p class="text-gray-700 whitespace-pre-line">{{ $package->full_description }}</p>
+                    <div class="ckeditor-content">
+                        {!! $package->full_description !!}
                     </div>
                 </div>
                 @endif
@@ -85,17 +117,26 @@
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <h4 class="text-lg font-semibold text-gray-900 mb-3">Galeri Foto</h4>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        @php $imageIndex = 0; @endphp
                         @foreach($package->galleries as $gallery)
-                            <div class="relative group">
+                            @if(file_exists(public_path('storage/' . $gallery->image_path)))
+                            <div class="relative group cursor-pointer" @click="openModal({{ $imageIndex }})">
                                 <img src="{{ asset('storage/' . $gallery->image_path) }}"
                                      alt="{{ $gallery->alt_text }}"
-                                     class="w-full h-32 object-cover rounded-lg">
+                                     class="w-full h-32 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105">
                                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200 rounded-lg flex items-center justify-center">
-                                    <button class="opacity-0 group-hover:opacity-100 text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded">
-                                        Lihat
-                                    </button>
+                                    <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
+                                        <div class="text-white">
+                                            <svg class="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <p class="text-sm font-medium">Lihat Foto</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            @php $imageIndex++; @endphp
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -261,6 +302,96 @@
                             class="w-full sm:w-auto px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-admin-primary">
                         Batal
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Gallery -->
+    <div x-show="showModal" class="fixed inset-0 z-50" aria-labelledby="gallery-modal" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div x-show="showModal"
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-gray-900/90 transition-opacity"
+             aria-hidden="true"
+             @click="closeModal()"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center">
+                <!-- Dialog panel -->
+                <div x-show="showModal"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave="ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     class="relative transform overflow-hidden rounded-lg bg-black text-left shadow-xl transition-all sm:my-8 w-full max-w-7xl"
+                     @click.stop>
+
+                    <!-- Gallery Content -->
+                    <div class="bg-black px-4 pt-5 pb-4 sm:p-6 relative">
+                        <!-- Close Button -->
+                        <button @click="closeModal()"
+                                class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-colors z-20">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+
+                        <!-- Image Container -->
+                        <div class="flex items-center justify-center relative min-h-[70vh]">
+                            <!-- Previous Button -->
+                            <button @click="prevImage()"
+                                    x-show="images.length > 1"
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all z-10">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+
+                            <!-- Image -->
+                            <img :src="images[currentImageIndex]?.src"
+                                 :alt="images[currentImageIndex]?.alt"
+                                 class="max-w-full max-h-[80vh] object-contain rounded-lg">
+
+                            <!-- Next Button -->
+                            <button @click="nextImage()"
+                                    x-show="images.length > 1"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all z-10">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Image Info -->
+                        <div class="mt-6 text-center">
+                            <h3 class="text-xl font-medium text-white" x-text="images[currentImageIndex]?.title"></h3>
+                            <p class="text-sm text-gray-300 mt-1" x-text="images[currentImageIndex]?.package"></p>
+                            <p class="text-sm text-gray-400 mt-2" x-show="images.length > 1">
+                                <span x-text="currentImageIndex + 1"></span> dari <span x-text="images.length"></span> foto
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button type="button"
+                                @click="closeModal()"
+                                class="inline-flex w-full justify-center rounded-md bg-admin-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-admin-secondary sm:ml-3 sm:w-auto">
+                            Tutup
+                        </button>
+                        <a href="{{ route('admin.galleries.index') }}"
+                           class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            Kelola Galeri
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

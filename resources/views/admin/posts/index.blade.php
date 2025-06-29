@@ -170,11 +170,11 @@
                             <div class="text-sm text-gray-900">{{ $post->author->name }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            @if($post->published_at)
+                            @if($post->is_published)
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     Dipublikasi
                                 </span>
-                                <div class="text-xs text-gray-500 mt-1">{{ $post->published_at->format('d M Y') }}</div>
+                                <div class="text-xs text-gray-500 mt-1">{{ $post->updated_at->format('d M Y') }}</div>
                             @else
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                                     Draft
@@ -222,7 +222,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
                     <div class="flex justify-between items-start mb-3">
                         <div class="font-bold text-base text-admin-primary">{{ Str::limit($post->title, 50) }}</div>
-                        @if($post->published_at)
+                        @if($post->is_published)
                             <span class="ml-2 px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded">
                                 Dipublikasi
                             </span>
@@ -242,10 +242,10 @@
                             <div class="font-medium text-gray-800">{{ $post->created_at->format('d M Y') }}</div>
                         </div>
                     </div>
-                    @if($post->published_at)
+                    @if($post->is_published)
                         <div class="mt-2 text-sm">
                             <span class="text-gray-500">Dipublikasi:</span>
-                            <span class="font-medium text-gray-800">{{ $post->published_at->format('d M Y') }}</span>
+                            <span class="font-medium text-gray-800">{{ $post->updated_at->format('d M Y') }}</span>
                         </div>
                     @endif
                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-end">

@@ -269,6 +269,30 @@
                         </div>
                     </div>
 
+                    <!-- Short Description -->
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                            Deskripsi Singkat
+                        </label>
+                        <textarea name="description" id="description-editor" rows="3"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
+                                  placeholder="Deskripsi singkat paket wisata (optional)">{{ old('description', $package->description) }}</textarea>
+                        <p class="text-sm text-gray-500 mt-1">Deskripsi singkat untuk preview di halaman paket</p>
+                    </div>
+
+                    <!-- Is Active -->
+                    <div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="is_active" name="is_active" value="1"
+                                   class="h-4 w-4 text-admin-primary focus:ring-admin-primary border-gray-300 rounded"
+                                   {{ old('is_active', $package->is_active) ? 'checked' : '' }}>
+                            <label for="is_active" class="ml-2 block text-sm text-gray-700">
+                                Paket Aktif
+                            </label>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Centang untuk mengaktifkan paket di halaman publik</p>
+                    </div>
+
                     <!-- Harga -->
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
@@ -322,7 +346,7 @@
                         <label for="routes" class="block text-sm font-medium text-gray-700 mb-2">
                             Rute Perjalanan <span class="text-red-500">*</span>
                         </label>
-                        <textarea name="routes" id="routes" rows="4"
+                        <textarea name="routes" id="routes-editor" rows="4"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
                                   placeholder="Deskripsikan rute perjalanan..." required>{{ old('routes', $package->routes) }}</textarea>
                     </div>
@@ -332,7 +356,7 @@
                         <label for="full_description" class="block text-sm font-medium text-gray-700 mb-2">
                             Deskripsi Lengkap
                         </label>
-                        <textarea name="full_description" id="full_description" rows="6"
+                        <textarea name="full_description" id="full-description-editor" rows="6"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
                                   placeholder="Deskripsi detail paket wisata...">{{ old('full_description', $package->full_description) }}</textarea>
                     </div>
@@ -359,7 +383,7 @@
             <!-- Action Buttons -->
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <div class="flex flex-col gap-3 sm:flex-row sm:justify-end sm:gap-4">
-                    <a href="{{ route('admin.packages.show', $package) }}"
+                    <a href="{{ route('admin.packages.index') }}"
                        class="w-full sm:w-auto px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-center inline-flex items-center justify-center">
                         Batal
                     </a>
@@ -374,10 +398,40 @@
 </main>
 
 @push('scripts')
+<!-- CKEditor CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
+    // Initialize CKEditor for description
+    ClassicEditor
+        .create(document.querySelector('#description-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing description editor:', error);
+        });
+
+    // Initialize CKEditor for routes
+    ClassicEditor
+        .create(document.querySelector('#routes-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing routes editor:', error);
+        });
+
+    // Initialize CKEditor for full_description
+    ClassicEditor
+        .create(document.querySelector('#full-description-editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+        })
+        .catch(error => {
+            console.error('Error initializing full description editor:', error);
+        });
+
     // Initialize Select2 for category
     $('.select2-category').select2({
         placeholder: 'Pilih Kategori',

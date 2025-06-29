@@ -1,3 +1,5 @@
+@section('title', 'Register Admin - Jeep Merapi Adventure')
+
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
