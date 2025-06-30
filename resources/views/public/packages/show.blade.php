@@ -43,7 +43,7 @@
 
                 @if($package->description)
                 <p class="text-xl text-green-100 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="400">
-                    {{ Str::limit($package->description, 200) }}
+                    {{ Str::limit(strip_tags($package->description), 200) }}
                 </p>
                 @endif
             </div>

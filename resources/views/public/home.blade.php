@@ -178,7 +178,7 @@
 
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $package->name }}</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit($package->description, 120) }}</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit(strip_tags($package->description), 120) }}</p>
 
                     <div class="flex items-center justify-between mb-4">
                         <div class="text-2xl font-bold text-green-600">
