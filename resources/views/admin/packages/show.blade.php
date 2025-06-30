@@ -202,7 +202,7 @@
                     <div class="space-y-3 text-sm text-gray-600">
                         <div>
                             <p class="font-medium">Dibuat:</p>
-                            <p>{{ $package->created_at->format('d/m/Y H:i') }}</p>
+                            <p>{{ $package->created_at ? $package->created_at->format('d/m/Y H:i') : '-' }}</p>
                             @if($package->createdByUser)
                                 <p class="text-xs">oleh {{ $package->createdByUser->name }}</p>
                             @endif
@@ -211,7 +211,7 @@
                         @if($package->updated_at != $package->created_at)
                         <div class="border-t pt-3">
                             <p class="font-medium">Terakhir diubah:</p>
-                            <p>{{ $package->updated_at->format('d/m/Y H:i') }}</p>
+                            <p>{{ $package->updated_at ? $package->updated_at->format('d/m/Y H:i') : '-' }}</p>
                             @if($package->updatedByUser)
                                 <p class="text-xs">oleh {{ $package->updatedByUser->name }}</p>
                             @endif

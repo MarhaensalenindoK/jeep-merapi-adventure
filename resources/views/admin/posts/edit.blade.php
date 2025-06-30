@@ -220,14 +220,14 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                                 <div>
                                     <span class="font-medium">Dibuat:</span>
-                                    <div>{{ $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}</div>
+                                    <div>{{ $post->created_at ? $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') : '-' }}</div>
                                     @if($post->created_by && $post->createdByUser)
                                         <div class="text-xs">oleh {{ $post->createdByUser->name }}</div>
                                     @endif
                                 </div>
                                 <div>
                                     <span class="font-medium">Diubah:</span>
-                                    <div>{{ $post->updated_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}</div>
+                                    <div>{{ $post->updated_at ? $post->updated_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') : '-' }}</div>
                                     @if($post->updated_by && $post->updatedByUser)
                                         <div class="text-xs">oleh {{ $post->updatedByUser->name }}</div>
                                     @endif

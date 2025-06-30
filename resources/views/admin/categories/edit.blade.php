@@ -81,7 +81,7 @@
                     </div>
                     <div>
                         <span class="text-gray-500">Tanggal dibuat:</span>
-                        <span class="font-medium text-gray-800">{{ $category->created_at->format('d M Y, H:i') }}</span>
+                        <span class="font-medium text-gray-800">{{ $category->created_at ? $category->created_at->format('d M Y, H:i') : '-' }}</span>
                     </div>
                     @if($category->updatedByUser)
                         <div>
@@ -90,7 +90,7 @@
                         </div>
                         <div>
                             <span class="text-gray-500">Tanggal diubah:</span>
-                            <span class="font-medium text-gray-800">{{ $category->updated_at->format('d M Y, H:i') }}</span>
+                            <span class="font-medium text-gray-800">{{ $category->updated_at ? $category->updated_at->format('d M Y, H:i') : '-' }}</span>
                         </div>
                     @endif
                     <div>

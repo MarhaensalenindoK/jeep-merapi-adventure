@@ -83,7 +83,7 @@
                         <td class="px-6 py-4 whitespace-nowrap"><div class="font-semibold text-sm text-gray-900">{{ $category->name }}</div></td>
                         <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ $category->packages_count }} paket</span></td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $category->createdByUser->name ?? 'Sistem' }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $category->created_at->format('d M Y') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $category->created_at ? $category->created_at->format('d M Y') : '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="action-buttons-group desktop">
                                 <!-- Edit Button -->
@@ -126,7 +126,7 @@
                         </div>
                         <div>
                             <div class="text-gray-500">Tanggal</div>
-                            <div class="font-medium text-gray-800">{{ $category->created_at->format('d M Y') }}</div>
+                            <div class="font-medium text-gray-800">{{ $category->created_at ? $category->created_at->format('d M Y') : '-' }}</div>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-end">

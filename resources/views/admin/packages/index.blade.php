@@ -169,7 +169,7 @@
                             <div class="text-sm font-medium text-gray-900">Rp {{ number_format($package->price) }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->duration }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->created_at->format('d M Y') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="action-buttons-group desktop">
                                 <!-- Detail Button -->

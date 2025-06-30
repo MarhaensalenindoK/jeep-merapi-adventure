@@ -179,7 +179,7 @@
                                 </span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $gallery->created_at->format('d M Y') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $gallery->created_at ? $gallery->created_at->format('d M Y') : '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="action-buttons-group desktop">
                                 <!-- View Button -->
@@ -258,7 +258,7 @@
                         </div>
                         <div>
                             <div class="text-gray-500">Tanggal</div>
-                            <div class="font-medium text-gray-800">{{ $gallery->created_at->format('d M Y') }}</div>
+                            <div class="font-medium text-gray-800">{{ $gallery->created_at ? $gallery->created_at->format('d M Y') : '-' }}</div>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-end">

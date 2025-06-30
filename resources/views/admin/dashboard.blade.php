@@ -121,7 +121,7 @@
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div>
                             <p class="font-semibold text-gray-900">{{ $package->name }}</p>
-                            <p class="text-sm text-gray-600">{{ $package->created_at->format('d M Y') }}</p>
+                            <p class="text-sm text-gray-600">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</p>
                         </div>
                         <span class="admin-badge admin-badge-success">Aktif</span>
                     </div>
@@ -139,7 +139,7 @@
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div>
                             <p class="font-semibold text-gray-900">{{ $post->title }}</p>
-                            <p class="text-sm text-gray-600">{{ $post->created_at->format('d M Y') }}</p>
+                            <p class="text-sm text-gray-600">{{ $post->created_at ? $post->created_at->format('d M Y') : '-' }}</p>
                         </div>
                         <span class="admin-badge admin-badge-success">Published</span>
                     </div>

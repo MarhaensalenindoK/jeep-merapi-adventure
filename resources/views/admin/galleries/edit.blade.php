@@ -254,14 +254,14 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                                 <div>
                                     <span class="font-medium">Dibuat:</span>
-                                    <div>{{ $gallery->created_at->format('d M Y, H:i') }}</div>
+                                    <div>{{ $gallery->created_at ? $gallery->created_at->format('d M Y, H:i') : '-' }}</div>
                                     @if($gallery->createdByUser)
                                         <div class="text-xs">oleh {{ $gallery->createdByUser->name }}</div>
                                     @endif
                                 </div>
                                 <div>
                                     <span class="font-medium">Diubah:</span>
-                                    <div>{{ $gallery->updated_at->format('d M Y, H:i') }}</div>
+                                    <div>{{ $gallery->updated_at ? $gallery->updated_at->format('d M Y, H:i') : '-' }}</div>
                                     @if($gallery->updatedByUser)
                                         <div class="text-xs">oleh {{ $gallery->updatedByUser->name }}</div>
                                     @endif

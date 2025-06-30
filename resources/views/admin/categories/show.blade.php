@@ -56,7 +56,7 @@
                 </div>
                 <div class="border-b border-gray-100 pb-3">
                     <dt class="text-sm font-medium text-gray-500">Tanggal dibuat</dt>
-                    <dd class="mt-1 text-lg text-gray-900">{{ $category->created_at->format('d F Y, H:i') }}</dd>
+                    <dd class="mt-1 text-lg text-gray-900">{{ $category->created_at ? $category->created_at->format('d F Y, H:i') : '-' }}</dd>
                 </div>
                 @if($category->updatedByUser)
                     <div class="border-b border-gray-100 pb-3">
@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <dt class="text-sm font-medium text-gray-500">Tanggal diubah</dt>
-                        <dd class="mt-1 text-lg text-gray-900">{{ $category->updated_at->format('d F Y, H:i') }}</dd>
+                        <dd class="mt-1 text-lg text-gray-900">{{ $category->updated_at ? $category->updated_at->format('d F Y, H:i') : '-' }}</dd>
                     </div>
                 @endif
             </div>
@@ -140,7 +140,7 @@
                                 <td>
                                     <span class="admin-badge admin-badge-success">Aktif</span>
                                 </td>
-                                <td class="text-gray-600">{{ $package->created_at->format('d M Y') }}</td>
+                                <td class="text-gray-600">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</td>
                                 <td class="text-right">
                                     <a href="{{ route('admin.packages.show', $package) }}"
                                        class="text-admin-primary hover:text-admin-secondary">

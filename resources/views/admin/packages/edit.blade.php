@@ -365,12 +365,12 @@
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <h4 class="text-sm font-medium text-gray-700 mb-2">Informasi Metadata</h4>
                         <div class="space-y-1 text-sm text-gray-600">
-                            <p><strong>Dibuat:</strong> {{ $package->created_at->format('d/m/Y H:i') }}</p>
+                            <p><strong>Dibuat:</strong> {{ $package->created_at ? $package->created_at->format('d/m/Y H:i') : '-' }}</p>
                             @if($package->createdByUser)
                                 <p><strong>Oleh:</strong> {{ $package->createdByUser->name }}</p>
                             @endif
                             @if($package->updated_at != $package->created_at)
-                                <p><strong>Terakhir diubah:</strong> {{ $package->updated_at->format('d/m/Y H:i') }}</p>
+                                <p><strong>Terakhir diubah:</strong> {{ $package->updated_at ? $package->updated_at->format('d/m/Y H:i') : '-' }}</p>
                                 @if($package->updatedByUser)
                                     <p><strong>Oleh:</strong> {{ $package->updatedByUser->name }}</p>
                                 @endif

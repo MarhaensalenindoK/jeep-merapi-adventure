@@ -179,7 +179,7 @@
                         <div class="space-y-3 text-sm">
                             <div>
                                 <label class="block font-medium text-gray-700">Dibuat</label>
-                                <p class="mt-1 text-gray-600">{{ $gallery->created_at->format('d M Y, H:i') }}</p>
+                                <p class="mt-1 text-gray-600">{{ $gallery->created_at ? $gallery->created_at->format('d M Y, H:i') : '-' }}</p>
                                 @if($gallery->createdByUser)
                                     <p class="text-xs text-gray-500">oleh {{ $gallery->createdByUser->name }}</p>
                                 @endif
@@ -187,7 +187,7 @@
 
                             <div>
                                 <label class="block font-medium text-gray-700">Terakhir Diubah</label>
-                                <p class="mt-1 text-gray-600">{{ $gallery->updated_at->format('d M Y, H:i') }}</p>
+                                <p class="mt-1 text-gray-600">{{ $gallery->updated_at ? $gallery->updated_at->format('d M Y, H:i') : '-' }}</p>
                                 @if($gallery->updatedByUser)
                                     <p class="text-xs text-gray-500">oleh {{ $gallery->updatedByUser->name }}</p>
                                 @endif
