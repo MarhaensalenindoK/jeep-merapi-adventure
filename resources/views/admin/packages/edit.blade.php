@@ -405,32 +405,53 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
-    // Initialize CKEditor for description
-    ClassicEditor
-        .create(document.querySelector('#description-editor'), {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
-        })
-        .catch(error => {
-            console.error('Error initializing description editor:', error);
-        });
+    // Wait for CKEditor to be available
+    function initializeCKEditors() {
+        if (typeof ClassicEditor === 'undefined') {
+            console.log('CKEditor not ready, retrying...');
+            setTimeout(initializeCKEditors, 100);
+            return;
+        }
 
-    // Initialize CKEditor for routes
-    ClassicEditor
-        .create(document.querySelector('#routes-editor'), {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
-        })
-        .catch(error => {
-            console.error('Error initializing routes editor:', error);
-        });
+        // Initialize CKEditor for description
+        const descriptionEditor = document.querySelector('#description-editor');
+        if (descriptionEditor) {
+            ClassicEditor
+                .create(descriptionEditor, {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+                })
+                .catch(error => {
+                    console.error('Error initializing description editor:', error);
+                });
+        }
 
-    // Initialize CKEditor for full_description
-    ClassicEditor
-        .create(document.querySelector('#full-description-editor'), {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
-        })
-        .catch(error => {
-            console.error('Error initializing full description editor:', error);
-        });
+        // Initialize CKEditor for routes
+        const routesEditor = document.querySelector('#routes-editor');
+        if (routesEditor) {
+            ClassicEditor
+                .create(routesEditor, {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+                })
+                .catch(error => {
+                    console.error('Error initializing routes editor:', error);
+                });
+        }
+
+        // Initialize CKEditor for full_description
+        const fullDescriptionEditor = document.querySelector('#full-description-editor');
+        if (fullDescriptionEditor) {
+            ClassicEditor
+                .create(fullDescriptionEditor, {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+                })
+                .catch(error => {
+                    console.error('Error initializing full description editor:', error);
+                });
+        }
+    }
+
+    // Initialize CKEditors
+    initializeCKEditors();
 
     // Initialize Select2 for category
     $('.select2-category').select2({
