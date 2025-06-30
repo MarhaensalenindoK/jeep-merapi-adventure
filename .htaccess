@@ -1,0 +1,64 @@
+# 🔒 Laravel Security .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Redirect all requests to public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+</IfModule>
+
+# 🚫 CRITICAL: Deny access to sensitive files
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files .env.*>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files composer.json>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files composer.lock>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files composer.phar>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files composer2.phar>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files artisan>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files deploy.sh>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# 🚫 Block access to Laravel directories
+<IfModule mod_rewrite.c>
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/.*)?$ - [F,L]
+    RewriteRule (^|/)\..*$ - [F,L]
+</IfModule>
+
+# 🛡️ Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+ServerSignature Off
+Options -Indexes
