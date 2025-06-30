@@ -218,7 +218,7 @@
                     .replace(/-+/g, '-')
                     .trim('-');
             }
-        }">
+        }" onsubmit="syncCKEditorData(event)">
             @csrf
             @method('PUT')
 
@@ -348,7 +348,7 @@
                         </label>
                         <textarea name="routes" id="routes-editor" rows="4"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Deskripsikan rute perjalanan..." required>{{ old('routes', $package->routes) }}</textarea>
+                                  placeholder="Deskripsikan rute perjalanan...">{{ old('routes', $package->routes) }}</textarea>
                     </div>
 
                     <!-- Deskripsi Lengkap -->
@@ -404,6 +404,42 @@
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+// Global variables to store CKEditor instances
+let descriptionEditorInstance = null;
+let routesEditorInstance = null;
+let fullDescriptionEditorInstance = null;
+
+// Function to sync CKEditor data to textareas before form submission
+function syncCKEditorData(event) {
+    try {
+        // Sync data from CKEditor to textareas
+        if (descriptionEditorInstance) {
+            document.querySelector('#description-editor').value = descriptionEditorInstance.getData();
+        }
+        if (routesEditorInstance) {
+            const routesData = routesEditorInstance.getData();
+            document.querySelector('#routes-editor').value = routesData;
+
+            // Custom validation for routes (required field)
+            if (!routesData || routesData.trim() === '') {
+                alert('Rute Perjalanan wajib diisi!');
+                event.preventDefault();
+                return false;
+            }
+        }
+        if (fullDescriptionEditorInstance) {
+            document.querySelector('#full-description-editor').value = fullDescriptionEditorInstance.getData();
+        }
+
+        console.log('CKEditor data synced successfully');
+        return true;
+    } catch (error) {
+        console.error('Error syncing CKEditor data:', error);
+        // Don't prevent form submission even if sync fails
+        return true;
+    }
+}
+
 $(document).ready(function() {
     // Wait for CKEditor to be available
     function initializeCKEditors() {
@@ -420,6 +456,10 @@ $(document).ready(function() {
                 .create(descriptionEditor, {
                     toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
                 })
+                .then(editor => {
+                    descriptionEditorInstance = editor;
+                    console.log('Description editor initialized');
+                })
                 .catch(error => {
                     console.error('Error initializing description editor:', error);
                 });
@@ -432,6 +472,10 @@ $(document).ready(function() {
                 .create(routesEditor, {
                     toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
                 })
+                .then(editor => {
+                    routesEditorInstance = editor;
+                    console.log('Routes editor initialized');
+                })
                 .catch(error => {
                     console.error('Error initializing routes editor:', error);
                 });
@@ -443,6 +487,10 @@ $(document).ready(function() {
             ClassicEditor
                 .create(fullDescriptionEditor, {
                     toolbar: ['heading', '|', 'bold', 'italic', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+                })
+                .then(editor => {
+                    fullDescriptionEditorInstance = editor;
+                    console.log('Full description editor initialized');
                 })
                 .catch(error => {
                     console.error('Error initializing full description editor:', error);
