@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-r from-orange-800 to-orange-600 text-white py-20">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-         style="background-image: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');">
+         style="background-image: url('{{ asset('banner.JPG') }}');">
     </div>
     <div class="relative z-10 container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">

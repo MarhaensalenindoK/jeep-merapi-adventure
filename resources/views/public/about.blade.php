@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-20">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-         style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+         style="background-image: url('{{ asset('banner.JPG') }}');">
     </div>
     <div class="relative z-10 container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
@@ -39,7 +39,7 @@
                     </p>
                 </div>
                 <div data-aos="fade-left">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    <img src="{{ asset('banner.JPG') }}"
                          alt="Tim Jeep Merapi Adventure"
                          class="rounded-lg shadow-lg">
                 </div>
@@ -153,9 +153,11 @@
 
         <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                     alt="Budi Santoso"
-                     class="w-full h-64 object-cover">
+                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Budi Santoso</h3>
                     <p class="text-green-600 font-medium mb-3">Founder & Head Guide</p>
@@ -164,9 +166,11 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                     alt="Andi Wijaya"
-                     class="w-full h-64 object-cover">
+                <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Andi Wijaya</h3>
                     <p class="text-green-600 font-medium mb-3">Operations Manager</p>
@@ -175,9 +179,11 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b977?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                     alt="Sari Lestari"
-                     class="w-full h-64 object-cover">
+                <div class="w-full h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Sari Lestari</h3>
                     <p class="text-green-600 font-medium mb-3">Customer Service</p>

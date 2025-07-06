@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-20">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-         style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+         style="background-image: url('{{ asset('banner.JPG') }}');">
     </div>
     <div class="relative z-10 container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
@@ -78,19 +78,19 @@
                 @foreach($packages as $package)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
                      data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
-                    @if($package->image_path && file_exists(public_path('storage/' . $package->image_path)))
+                @if($package->galleries->first())
                     <div class="aspect-video overflow-hidden">
-                        <img src="{{ asset('storage/' . $package->image_path) }}"
+                        <img src="{{ asset('storage/' . $package->galleries->first()->image_path) }}"
                              alt="{{ $package->name }}"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
-                    @else
+                @else
                     <div class="aspect-video bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
                         <svg class="w-16 h-16 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
                         </svg>
                     </div>
-                    @endif
+                @endif
 
                     <div class="p-6 flex flex-col flex-grow">
                         <!-- Package Category -->

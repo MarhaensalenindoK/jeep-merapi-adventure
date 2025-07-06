@@ -6,13 +6,13 @@
 @section('content')
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-r from-green-800 to-green-600 text-white py-20">
-    @if($package->image_path && file_exists(public_path('storage/' . $package->image_path)))
+    @if($package->galleries->first())
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-         style="background-image: url('{{ asset('storage/' . $package->image_path) }}');">
+         style="background-image: url('{{ asset('storage/' . $package->galleries->first()->image_path) }}');">
     </div>
     @else
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-         style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+         style="background-image: url('{{ asset('banner.JPG') }}');">
     </div>
     @endif
     <div class="relative z-10 container mx-auto px-4">
@@ -252,9 +252,9 @@
                 @foreach($relatedPackages as $relatedPackage)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                      data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
-                    @if($relatedPackage->image_path && file_exists(public_path('storage/' . $relatedPackage->image_path)))
+                    @if($relatedPackage->galleries->first())
                     <div class="aspect-video overflow-hidden">
-                        <img src="{{ asset('storage/' . $relatedPackage->image_path) }}"
+                        <img src="{{ asset('storage/' . $relatedPackage->galleries->first()->image_path) }}"
                              alt="{{ $relatedPackage->name }}"
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
