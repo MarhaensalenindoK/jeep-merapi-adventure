@@ -1,21 +1,36 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+# MAINTENANCE MODE - Jeep Merapi Adventure
+# Mengalihkan semua traffic ke halaman maintenance
+# Kecuali untuk IP admin dan file-file tertentu
 
-    RewriteEngine On
+RewriteEngine On
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# Izinkan akses ke file maintenance dan asset
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteCond %{REQUEST_URI} !^/fav\.png$
+RewriteCond %{REQUEST_URI} !^/favicon\.ico$
+RewriteCond %{REQUEST_URI} !^/banner\.JPG$
+RewriteCond %{REQUEST_URI} !^/icon\.png$
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+# Izinkan akses untuk IP admin tertentu (ganti dengan IP Anda)
+# Contoh: RewriteCond %{REMOTE_ADDR} !^192\.168\.1\.100$
+# Contoh: RewriteCond %{REMOTE_ADDR} !^203\.142\.82\.150$
 
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+# Redirect semua request selain yang dikecualikan ke maintenance.html
+RewriteRule ^(.*)$ /maintenance.html [R=302,L]
+
+# Security Headers untuk halaman maintenance
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Cache control untuk halaman maintenance
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType image/png "access plus 1 day"
+    ExpiresByType image/jpg "access plus 1 day"
+    ExpiresByType image/jpeg "access plus 1 day"
 </IfModule>
