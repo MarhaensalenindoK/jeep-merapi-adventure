@@ -117,14 +117,16 @@
         <div class="admin-card">
             <h3 class="text-xl font-bold text-gray-900 mb-4">Paket Terbaru</h3>
             <div class="space-y-3">
-                @forelse(\App\Models\Package::latest()->take(5)->get() as $package)
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="font-semibold text-gray-900">{{ $package->name }}</p>
-                            <p class="text-sm text-gray-600">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</p>
+                @forelse($recentPackages as $package)
+                    <a href="{{ route('admin.packages.show', $package) }}" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 hover:shadow-md transition-all duration-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-gray-900">{{ $package->name }}</p>
+                                <p class="text-sm text-gray-600">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</p>
+                            </div>
+                            <span class="admin-badge {{ $package->is_active ? 'admin-badge-success' : 'admin-badge-danger' }}">{{ $package->is_active ? 'Aktif' : 'Nonaktif' }}</span>
                         </div>
-                        <span class="admin-badge admin-badge-success">Aktif</span>
-                    </div>
+                    </a>
                 @empty
                     <p class="text-gray-500 text-center py-4">Belum ada paket</p>
                 @endforelse
@@ -135,14 +137,16 @@
         <div class="admin-card">
             <h3 class="text-xl font-bold text-gray-900 mb-4">Blog Terbaru</h3>
             <div class="space-y-3">
-                @forelse(\App\Models\Post::latest()->take(5)->get() as $post)
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="font-semibold text-gray-900">{{ $post->title }}</p>
-                            <p class="text-sm text-gray-600">{{ $post->created_at ? $post->created_at->format('d M Y') : '-' }}</p>
+                @forelse($recentPosts as $post)
+                     <a href="{{ route('admin.posts.show', $post) }}" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 hover:shadow-md transition-all duration-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-gray-900">{{ $post->title }}</p>
+                                <p class="text-sm text-gray-600">{{ $post->created_at ? $post->created_at->format('d M Y') : '-' }}</p>
+                            </div>
+                            <span class="admin-badge {{ $post->is_published ? 'admin-badge-success' : 'admin-badge-warning' }}">{{ $post->is_published ? 'Published' : 'Draft' }}</span>
                         </div>
-                        <span class="admin-badge admin-badge-success">Published</span>
-                    </div>
+                    </a>
                 @empty
                     <p class="text-gray-500 text-center py-4">Belum ada blog</p>
                 @endforelse

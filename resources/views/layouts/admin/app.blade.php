@@ -8,7 +8,7 @@
     <title>@yield('title', 'Dashboard') - Jeep Merapi Adventure</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('fav.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,12 +23,15 @@
 <body class="font-sans antialiased bg-admin-light">
     <div class="flex min-h-screen" x-data="{ sidebarOpen: false, profileDropdown: false }">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-admin-primary shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0"
+        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-admin-primary shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0"
              :class="{ '-translate-x-full': !sidebarOpen, 'translate-x-0': sidebarOpen }">
 
             <!-- Logo/Brand -->
             <div class="flex items-center justify-center h-16 bg-admin-primary border-b border-admin-secondary/20">
-                <h1 class="text-white text-xl font-bold">Admin Panel</h1>
+                <div class="flex items-center space-x-3">
+                    <img src="{{ asset('fav.png') }}" alt="Jeep Merapi Adventure" class="w-8 h-8 rounded-lg">
+                    <h1 class="text-white text-xl font-bold">Admin Panel</h1>
+                </div>
             </div>
 
             <!-- Navigation Menu -->
@@ -139,7 +142,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 lg:ml-0">
+        <div class="flex-1 lg:ml-64">
             <!-- Mobile menu button -->
             <div class="lg:hidden">
                 <button @click="sidebarOpen = !sidebarOpen"

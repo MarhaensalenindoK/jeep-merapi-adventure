@@ -7,11 +7,7 @@
                 <a href="{{ route('home') }}" class="flex items-center">
                     <div class="flex items-center space-x-3">
                         <!-- Logo Icon -->
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
-                            </svg>
-                        </div>
+                        <img src="{{ asset('fav.png') }}" alt="Jeep Merapi Adventure" class="w-10 h-10 rounded-lg">
                         <!-- Logo Text -->
                         <div class="hidden sm:block">
                             <div class="font-bold text-lg text-gray-900">Jeep Merapi</div>
@@ -53,7 +49,7 @@
 
             <!-- CTA Button -->
             <div class="hidden md:block">
-                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/6281809769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -107,7 +103,7 @@
                     Kontak
                 </a>
                 <div class="pt-4 pb-3 border-t border-gray-200">
-                    <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                    <a href="https://wa.me/6281809769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                        target="_blank"
                        class="bg-green-600 hover:bg-green-700 text-white block px-3 py-2 text-base font-medium rounded-lg mx-3 text-center">
                         Hubungi Kami via WhatsApp

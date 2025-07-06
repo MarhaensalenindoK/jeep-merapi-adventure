@@ -16,10 +16,10 @@ class UserSeeder extends Seeder
     {
         // Buat admin user untuk testing
         User::firstOrCreate(
-            ['email' => 'admin@jeepmerapiadventure.com'],
+            ['email' => 'elissuraningsih@gmail.com'],
             [
                 'name' => 'Administrator',
-                'email' => 'admin@jeepmerapiadventure.com',
+                'email' => 'elissuraningsih@gmail.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
 
         $this->command->info('Users created successfully!');
         $this->command->info('Login credentials:');
-        $this->command->info('- admin@jeepmerapiadventure.com / password');
+        $this->command->info('- elissuraningsih@gmail.com / password');
         $this->command->info('- manager@jeepmerapiadventure.com / password');
         $this->command->info('- staff@jeepmerapiadventure.com / password');
         $this->command->info('- content@jeepmerapiadventure.com / password');

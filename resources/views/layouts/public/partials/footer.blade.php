@@ -6,11 +6,7 @@
             <div class="space-y-4">
                 <div class="flex items-center space-x-3">
                     <!-- Logo Icon -->
-                    <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset('fav.png') }}" alt="Jeep Merapi Adventure" class="w-10 h-10 rounded-lg">
                     <!-- Logo Text -->
                     <div>
                         <div class="font-bold text-lg">Jeep Merapi Adventure</div>
@@ -86,7 +82,7 @@
                             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
                         </svg>
                         <div>
-                            <p class="text-gray-300 text-sm">Jeep Merapi Lava Tour Jl. Kaliurang KM 23, Kaliurang Selatan, Ngipiksari, Hargobinangun, Pakem, Sleman, Yogyakarta 55585</p>
+                            <p class="text-gray-300 text-sm">Sidorejo Umbulharjo Cangkringan Sleman Yogyakarta</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-3">
@@ -94,7 +90,7 @@
                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                         </svg>
                         <div>
-                            <p class="text-gray-300 text-sm">+62 818-0976-9095</p>
+                            <p class="text-gray-300 text-sm">+6281809769095</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-3">
@@ -103,7 +99,7 @@
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                         </svg>
                         <div>
-                            <p class="text-gray-300 text-sm">info@jeepmerapiadventure.com</p>
+                            <p class="text-gray-300 text-sm">elissuraningsih@gmail.com</p>
                         </div>
                     </li>
                 </ul>
@@ -119,7 +115,7 @@
                         </svg>
                         <div>
                             <p class="text-gray-300 text-sm font-medium">Senin - Minggu</p>
-                            <p class="text-gray-400 text-sm">05:00 - 18:00 WIB</p>
+                            <p class="text-gray-400 text-sm">04:00 - 18:00 WIB</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-3">

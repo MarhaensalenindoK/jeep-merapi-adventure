@@ -84,8 +84,8 @@
                                                  alt="{{ $gallery->alt_text ?? $gallery->title }}"
                                                  class="max-w-full max-h-full object-contain rounded-lg"
                                                  @click.stop>
-                                            <button @click="showModal = false"
-                                                    class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-colors">
+                                            <button @click.stop="showModal = false"
+                                                    class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-colors z-10">
                                                 <x-icon name="close" class="w-6 h-6" />
                                             </button>
                                         </div>
@@ -110,10 +110,11 @@
                             <input id="image" name="image" type="file" accept="image/*" class="sr-only"
                                    @change="$store.gallery.previewImage($event)">
 
-                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors"
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors cursor-pointer"
                                  @drop="$store.gallery.handleFileDrop($event)"
                                  @dragover.prevent
-                                 @dragenter.prevent>
+                                 @dragenter.prevent
+                                 @click="document.getElementById('image').click()">
                                 <div class="space-y-1 text-center">
                                     <div x-show="!$store.gallery.imagePreview">
                                         <x-icon name="image" class="mx-auto h-8 w-8 text-gray-400" />
@@ -178,13 +179,13 @@
                         <!-- Alt Text -->
                         <div>
                             <label for="alt_text" class="block text-sm font-medium text-gray-700 mb-2">
-                                Alt Text
+                                Alternatif Teks
                             </label>
                             <input type="text" id="alt_text" name="alt_text"
                                    class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-admin-primary focus:border-admin-primary"
                                    value="{{ old('alt_text', $gallery->alt_text) }}" maxlength="255"
                                    placeholder="Deskripsi gambar untuk aksesibilitas">
-                            <p class="mt-1 text-sm text-gray-500">Alt text membantu aksesibilitas dan SEO</p>
+                            <p class="mt-1 text-sm text-gray-500">Alternatif teks membantu aksesibilitas dan SEO</p>
                             @error('alt_text')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -210,23 +211,9 @@
                             @enderror
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Sort Order -->
-                            <div>
-                                <label for="sort_order" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Urutan Tampil
-                                </label>
-                                <input type="number" id="sort_order" name="sort_order" min="0"
-                                       class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-admin-primary focus:border-admin-primary"
-                                       value="{{ old('sort_order', $gallery->sort_order) }}"
-                                       placeholder="{{ $gallery->sort_order }}">
-                                <p class="mt-1 text-sm text-gray-500">
-                                    Angka kecil tampil lebih dulu. Urutan tertinggi saat ini: {{ $maxSortOrder }}
-                                </p>
-                                @error('sort_order')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
-                            </div>
+                        <div class="grid grid-cols-1 gap-6">
+                            <!-- Sort Order (Hidden) -->
+                            <input type="hidden" name="sort_order" value="{{ old('sort_order', $gallery->sort_order) }}">
 
                             <!-- Featured -->
                             <div>

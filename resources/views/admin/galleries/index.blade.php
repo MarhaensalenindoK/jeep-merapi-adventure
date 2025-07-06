@@ -6,7 +6,6 @@
 /* Tooltip styling */
 [data-tooltip] {
     position: relative;
-    cursor: help;
 }
 
 [data-tooltip]:hover:after {
@@ -97,8 +96,9 @@
                 <!-- Package Filter -->
                 <div>
                     <x-select2 name="package_id"
-                               placeholder="Semua Paket"
-                               :selected="request('package_id')">
+                               placeholder="Ketik Paket"
+                               :selected="request('package_id')"
+                               allow-clear="true">
                         @foreach($packages as $package)
                             <option value="{{ $package->id }}"
                                     {{ request('package_id') == $package->id ? 'selected' : '' }}>
@@ -113,9 +113,11 @@
                     <x-button variant="secondary" icon="search" type="submit" class="flex-1">
                         Cari
                     </x-button>
-                    <x-button variant="outline" icon="refresh" :href="route('admin.galleries.index')" class="flex-1">
-                        Reset
-                    </x-button>
+                    @if(request()->anyFilled(['search', 'package_id']))
+                        <x-button variant="outline" icon="refresh" :href="route('admin.galleries.index')" class="flex-1">
+                            Reset
+                        </x-button>
+                    @endif
                 </div>
             </div>
         </form>
@@ -157,27 +159,31 @@
                                 @endif
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="font-semibold text-sm text-gray-900">{{ $gallery->title }}</div>
-                            @if($gallery->is_featured)
-                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                                    <x-icon name="star" class="w-3 h-3 mr-1" />
-                                    Unggulan
-                                </span>
-                            @endif
+                        <td class="px-6 py-4">
+                            <div class="max-w-48">
+                                <div class="font-semibold text-sm text-gray-900 break-words">{{ $gallery->title }}</div>
+                                @if($gallery->is_featured)
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mt-1">
+                                        <x-icon name="star" class="w-3 h-3 mr-1" />
+                                        Unggulan
+                                    </span>
+                                @endif
+                            </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            @if($gallery->package)
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
-                                      title="{{ $gallery->package->name }}"
-                                      data-tooltip="{{ $gallery->package->name }}">
-                                    {{ Str::limit($gallery->package->name, 20) }}
-                                </span>
-                            @else
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                    Umum
-                                </span>
-                            @endif
+                        <td class="px-6 py-4">
+                            <div class="max-w-32">
+                                @if($gallery->package)
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 cursor-pointer break-words"
+                                          title="{{ $gallery->package->name }}"
+                                          data-tooltip="{{ $gallery->package->name }}">
+                                        {{ Str::limit($gallery->package->name, 15) }}
+                                    </span>
+                                @else
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                        Umum
+                                    </span>
+                                @endif
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $gallery->created_at ? $gallery->created_at->format('d M Y') : '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -297,8 +303,8 @@
 
         <!-- Pagination Links -->
         <div class="mt-6">
-            {{ $galleries->withQueryString()->links() }}
-        </div>
+                {{ $galleries->appends(request()->query())->links('vendor.pagination.custom-theme') }}
+            </div>
     </div>
 
     <!-- Delete Confirmation Modal -->
@@ -309,4 +315,19 @@
         Gambar dan semua data akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
     </x-delete-modal>
 </main>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto refresh when Select2 clear button is clicked
+    $(document).on('select2:clear', 'select[name="package_id"]', function() {
+        // Small delay to ensure the value is cleared
+        setTimeout(() => {
+            this.closest('form').submit();
+        }, 100);
+    });
+});
+</script>
+@endpush
+
 @endsection

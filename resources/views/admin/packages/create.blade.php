@@ -191,7 +191,8 @@
         </div>
 
         @if($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 relative">
+                <button onclick="this.parentElement.style.display='none'" class="absolute top-1 right-2 text-red-700 hover:text-red-900 text-xl font-bold">&times;</button>
                 <ul class="list-disc list-inside">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -222,7 +223,7 @@
                         </label>
                         <select name="package_category_id" id="package_category_id"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary select2-category"
-                                required>
+                                required oninvalid="this.setCustomValidity('Mohon pilih Kategori Paket')" oninput="this.setCustomValidity('')">
                             <option value="">Pilih Kategori</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"
@@ -243,7 +244,9 @@
                         <input type="text" name="name" id="name"
                                x-model="name"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                               value="{{ old('name') }}" required>
+                               value="{{ old('name') }}"
+                               placeholder="Contoh: Paket Keluarga"
+                               required oninvalid="this.setCustomValidity('Mohon isi Nama Paket')" oninput="this.setCustomValidity('')">
                     </div>
 
                     <!-- Preview Slug -->
@@ -264,8 +267,7 @@
                         </label>
                         <textarea name="description" id="description-editor" rows="3"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Deskripsi singkat paket wisata (optional)">{{ old('description') }}</textarea>
-                        <p class="text-sm text-gray-500 mt-1">Deskripsi singkat untuk preview di halaman paket</p>
+                                  placeholder="Deskripsi singkat untuk preview di halaman paket">{{ old('description') }}</textarea>
                     </div>
 
                     <!-- Routes -->
@@ -273,10 +275,9 @@
                         <label for="routes" class="block text-sm font-medium text-gray-700 mb-2">
                             Rute Perjalanan <span class="text-red-500">*</span>
                         </label>
-                        <textarea name="routes" id="routes-editor" rows="4"
+                        <textarea name="routes" id="routes-editor" rows="6"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Rute perjalanan dan itinerary paket wisata">{{ old('routes') }}</textarea>
-                        <p class="text-sm text-gray-500 mt-1">Detail rute dan jadwal perjalanan</p>
+                                  placeholder="Paket wisata, fasilitas, dan informasi lainnya">{{ old('routes') }}</textarea>
                     </div>
 
                     <!-- Full Description -->
@@ -284,10 +285,9 @@
                         <label for="full_description" class="block text-sm font-medium text-gray-700 mb-2">
                             Deskripsi Lengkap
                         </label>
-                        <textarea name="full_description" id="full-description-editor" rows="6"
+                        <textarea name="full_description" id="full-description-editor" rows="10"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                                  placeholder="Deskripsi lengkap paket wisata dengan detail fasilitas dan informasi tambahan">{{ old('full_description') }}</textarea>
-                        <p class="text-sm text-gray-500 mt-1">Deskripsi detail untuk halaman lengkap paket</p>
+                                  placeholder="Paket wisata, fasilitas, dan informasi lainnya">{{ old('full_description') }}</textarea>
                     </div>
 
                     <!-- Is Active -->
@@ -308,31 +308,19 @@
                 <div class="space-y-4">
                     <!-- Harga -->
                     <div>
-                        <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
                             Harga (Rp) <span class="text-red-500">*</span>
                         </label>
-                        <input type="number" name="price" id="price"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                               value="{{ old('price') }}" min="0" required
-                               oninput="updatePricePreview(this.value)">
-                        <p class="text-sm text-gray-500 mt-1">Masukkan harga dalam Rupiah</p>
-                        <div id="price-preview" class="text-sm text-blue-600 font-medium mt-1"></div>
+                        <!-- Hidden raw value sent to controller -->
+                        <input type="hidden" name="price" id="price_raw" value="{{ old('price') }}">
+                        <!-- Visible formatted input -->
+                        <input type="text" id="price_formatted"
+                            inputmode="numeric"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
+                            value="{{ old('price') ? number_format(old('price'), 0, '', '.') : '' }}"
+                            placeholder="Ketik Nominal"
+                            oninput="formatCurrency(this)" onchange="formatCurrency(this)">
                     </div>
-
-                    <script>
-                        function updatePricePreview(value) {
-                            const preview = document.getElementById('price-preview');
-                            if (value && value > 0) {
-                                const formatted = new Intl.NumberFormat('id-ID', {
-                                    style: 'currency',
-                                    currency: 'IDR'
-                                }).format(value);
-                                preview.textContent = `Preview: ${formatted}`;
-                            } else {
-                                preview.textContent = '';
-                            }
-                        }
-                    </script>
 
                     <!-- Durasi -->
                     <div>
@@ -342,7 +330,8 @@
                         <input type="text" name="duration" id="duration"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
                                value="{{ old('duration') }}"
-                               placeholder="Contoh: 2 Hari 1 Malam" required>
+                               placeholder="Contoh: 2 Hari 1 Malam"
+                               required oninvalid="this.setCustomValidity('Mohon isi Durasi')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
             </div>
@@ -371,6 +360,25 @@
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+// Function to format currency input
+function formatCurrency(el) {
+    // Remove non-digit characters
+    let digits = el.value.replace(/\D/g, '');
+
+    // Update raw hidden input
+    document.getElementById('price_raw').value = digits;
+
+    // Format for display
+    if (digits) {
+        el.value = new Intl.NumberFormat('id-ID').format(digits);
+    } else {
+        el.value = '';
+    }
+
+    // Clear any validation messages
+    el.setCustomValidity('');
+}
+
 // Global variables to store CKEditor instances
 let descriptionEditorInstance = null;
 let routesEditorInstance = null;
@@ -379,6 +387,14 @@ let fullDescriptionEditorInstance = null;
 // Function to sync CKEditor data to textareas before form submission
 function syncCKEditorData(event) {
     try {
+        // Validate price field before submission
+        const priceRaw = document.getElementById('price_raw').value;
+        if (!priceRaw || priceRaw.trim() === '' || parseInt(priceRaw) <= 0) {
+            alert('Harga paket wajib diisi dan harus lebih dari 0!');
+            event.preventDefault();
+            return false;
+        }
+
         // Sync data from CKEditor to textareas
         if (descriptionEditorInstance) {
             document.querySelector('#description-editor').value = descriptionEditorInstance.getData();
@@ -386,9 +402,9 @@ function syncCKEditorData(event) {
         if (routesEditorInstance) {
             const routesData = routesEditorInstance.getData();
             document.querySelector('#routes-editor').value = routesData;
-            
+
             // Custom validation for routes (required field)
-            if (!routesData || routesData.trim() === '') {
+            if (!routesData || routesData.trim() === '' || routesData === '<p>&nbsp;</p>' || routesData === '<p></p>') {
                 alert('Rute Perjalanan wajib diisi!');
                 event.preventDefault();
                 return false;
@@ -397,7 +413,7 @@ function syncCKEditorData(event) {
         if (fullDescriptionEditorInstance) {
             document.querySelector('#full-description-editor').value = fullDescriptionEditorInstance.getData();
         }
-        
+
         console.log('CKEditor data synced successfully');
         return true;
     } catch (error) {
@@ -467,6 +483,12 @@ $(document).ready(function() {
 
     // Initialize CKEditors
     initializeCKEditors();
+
+    // Initialize price formatting on page load
+    const priceFormatted = document.getElementById('price_formatted');
+    if (priceFormatted && priceFormatted.value) {
+        formatCurrency(priceFormatted);
+    }
 
     // Initialize Select2 for category
     $('.select2-category').select2({

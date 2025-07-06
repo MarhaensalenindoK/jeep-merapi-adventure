@@ -8,7 +8,7 @@
         <title>@yield('title', 'Login Admin - Jeep Merapi Adventure')</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('fav.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

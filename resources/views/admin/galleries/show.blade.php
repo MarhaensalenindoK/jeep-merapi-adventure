@@ -78,25 +78,37 @@
                     </div>
 
                     <!-- Navigation -->
-                    @if($prevGallery || $nextGallery)
+                    @if($prevGallery || $nextGallery || $gallery->package)
                     <div class="flex justify-between items-center pt-4 border-t">
-                        <div>
+                        <div class="w-32">
                             @if($prevGallery)
                                 <x-button variant="outline" size="sm" icon="arrow-left" :href="route('admin.galleries.show', $prevGallery)">
                                     Sebelumnya
                                 </x-button>
+                            @else
+                                <div class="opacity-50 cursor-not-allowed">
+                                    <x-button variant="outline" size="sm" icon="arrow-left" disabled>
+                                        Sebelumnya
+                                    </x-button>
+                                </div>
                             @endif
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="flex-1 text-center text-sm text-gray-500">
                             @if($gallery->package)
                                 Galeri dalam paket: {{ $gallery->package->name }}
                             @endif
                         </div>
-                        <div>
+                        <div class="w-32 text-right">
                             @if($nextGallery)
                                 <x-button variant="outline" size="sm" icon="arrow-right" :href="route('admin.galleries.show', $nextGallery)">
                                     Selanjutnya
                                 </x-button>
+                            @else
+                                <div class="opacity-50 cursor-not-allowed">
+                                    <x-button variant="outline" size="sm" icon="arrow-right" disabled>
+                                        Selanjutnya
+                                    </x-button>
+                                </div>
                             @endif
                         </div>
                     </div>

@@ -18,16 +18,6 @@
                            class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
                            value="{{ request('search') }}"
                            id="search-input">
-                    @if(request('search'))
-                        <button type="button"
-                                onclick="document.getElementById('search-input').value=''; this.closest('form').submit();"
-                                class="absolute inset-y-0 right-8 flex items-center pr-2 text-gray-400 hover:text-gray-600"
-                                title="Clear search">
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    @endif
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
@@ -48,9 +38,6 @@
                 <x-alert type="info" class="mb-4">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <span class="text-left">Menampilkan hasil pencarian untuk: <strong>"{{ request('search') }}"</strong></span>
-                        <a href="{{ route('admin.categories.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium whitespace-nowrap">
-                            Tampilkan semua
-                        </a>
                     </div>
                 </x-alert>
             @endif
@@ -158,8 +145,8 @@
 
         <!-- Pagination Links -->
         <div class="mt-6">
-            {{ $categories->withQueryString()->links() }}
-        </div>
+                {{ $categories->appends(request()->query())->links('vendor.pagination.custom-theme') }}
+            </div>
     </div>
 
     <!-- Delete Confirmation Modal -->

@@ -136,7 +136,7 @@
                                class="flex-1 bg-green-600 hover:bg-green-700 text-white text-center px-4 py-2 rounded-lg font-medium transition-colors">
                                 Lihat Detail
                             </a>
-                            <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20{{ urlencode($package->name) }}"
+                            <a href="https://wa.me/6281809769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20{{ urlencode($package->name) }}"
                                target="_blank"
                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -154,7 +154,7 @@
             <div class="mt-12">
                 <!-- Pagination Links -->
                 <div>
-                    {{ $packages->appends(request()->query())->links() }}
+                    {{ $packages->appends(request()->query())->links('vendor.pagination.custom-theme') }}
                 </div>
             </div>
             @endif
@@ -202,7 +202,7 @@
                    class="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors">
                     Konsultasi Gratis
                 </a>
-                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20ingin%20membuat%20paket%20custom%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/6281809769095?text=Halo,%20saya%20ingin%20membuat%20paket%20custom%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 rounded-lg font-bold transition-colors">
                     Chat WhatsApp

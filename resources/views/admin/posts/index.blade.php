@@ -6,7 +6,6 @@
 /* Tooltip styling */
 [data-tooltip] {
     position: relative;
-    cursor: help;
 }
 
 [data-tooltip]:hover:after {
@@ -97,7 +96,7 @@
                 <!-- Author Filter -->
                 <div>
                     <x-select2 name="author_id"
-                               placeholder="Semua Penulis"
+                               placeholder="Ketik Penulis..."
                                :selected="request('author_id')">
                         @foreach($authors as $author)
                             <option value="{{ $author->id }}"
@@ -122,9 +121,11 @@
                     <x-button variant="secondary" icon="search" type="submit" class="flex-1">
                         Cari
                     </x-button>
-                    <x-button variant="outline" icon="refresh" :href="route('admin.posts.index')" class="flex-1">
-                        Reset
-                    </x-button>
+                    @if(request()->anyFilled(['search', 'author_id', 'status']))
+                        <x-button variant="outline" icon="refresh" :href="route('admin.posts.index')" class="flex-1">
+                            Reset
+                        </x-button>
+                    @endif
                 </div>
             </div>
         </form>
@@ -284,7 +285,7 @@
 
         <!-- Pagination Links -->
         <div class="mt-6">
-            {{ $posts->appends(request()->query())->links() }}
+            {{ $posts->appends(request()->query())->links('vendor.pagination.custom-theme') }}
         </div>
     </div>
 

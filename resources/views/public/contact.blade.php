@@ -102,7 +102,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Telepon & WhatsApp</h3>
-                                    <p class="text-gray-600 mb-2">+62 818-0976-9095</p>
+                                    <p class="text-gray-600 mb-2">+6281809769095</p>
                                     <p class="text-sm text-gray-500">Tersedia 24/7 untuk informasi dan booking</p>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-                                    <p class="text-gray-600 mb-2">info@jeepmerapiadventure.com</p>
+                                    <p class="text-gray-600 mb-2">elissuraningsih@gmail.com</p>
                                     <p class="text-sm text-gray-500">Respon dalam 24 jam</p>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Alamat</h3>
-                                    <p class="text-gray-600 mb-2">Jeep Merapi Lava Tour Jl. Kaliurang KM 23<br>Kaliurang Selatan, Ngipiksari, Hargobinangun<br>Pakem, Sleman, Yogyakarta 55585</p>
+                                    <p class="text-gray-600 mb-2">Sidorejo Umbulharjo Cangkringan Sleman Yogyakarta</p>
                                     <p class="text-sm text-gray-500">Base camp dan titik kumpul</p>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Jam Operasional</h3>
                                     <div class="text-gray-600 space-y-1">
-                                        <p>Senin - Minggu: 06:00 - 22:00 WIB</p>
+                                        <p>Senin - Minggu: 04:00 - 18:00 WIB</p>
                                         <p class="text-sm text-gray-500">Untuk keadaan darurat, hubungi WhatsApp 24/7</p>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
 
                     <!-- Quick Actions -->
                     <div class="mt-8 space-y-4">
-                        <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                        <a href="https://wa.me/6281809769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                            target="_blank"
                            class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition-colors inline-flex items-center justify-center">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
@@ -168,7 +168,7 @@
                             Chat WhatsApp Sekarang
                         </a>
 
-                        <a href="tel:+62818909769095"
+                        <a href="tel:+6281809769095"
                            class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors inline-flex items-center justify-center">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
@@ -209,7 +209,7 @@
                             </svg>
                         </div>
                         <h3 class="font-semibold text-gray-900 mb-1">Alamat Lengkap</h3>
-                        <p class="text-sm text-gray-600">Jeep Merapi Lava Tour Jl. Kaliurang KM 23, Kaliurang Selatan, Ngipiksari, Hargobinangun, Pakem, Sleman, Yogyakarta 55585</p>
+                        <p class="text-sm text-gray-600">Sidorejo Umbulharjo Cangkringan Sleman Yogyakarta</p>
                     </div>
 
                     <div class="text-center">
@@ -230,7 +230,7 @@
                             </svg>
                         </div>
                         <h3 class="font-semibold text-gray-900 mb-1">Akses</h3>
-                        <p class="text-sm text-gray-600">25 menit dari pusat kota Yogyakarta via Jl. Kaliurang</p>
+                        <p class="text-sm text-gray-600">Lokasi strategis di kawasan wisata Merapi</p>
                     </div>
                 </div>
             </div>
@@ -253,7 +253,7 @@
                    class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors">
                     Lihat Paket Wisata
                 </a>
-                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/6281809769095?text=Halo,%20saya%20tertarik%20dengan%20paket%20wisata%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-bold transition-colors">
                     Chat WhatsApp
@@ -351,7 +351,7 @@ function sendToWhatsApp(event) {
     const encodedMessage = encodeURIComponent(whatsappMessage);
 
     // Nomor WhatsApp (tanpa +)
-    const whatsappNumber = '62818909769095';
+    const whatsappNumber = '6281809769095';
 
     // Buat URL WhatsApp
     currentWhatsAppURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;

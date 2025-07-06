@@ -68,39 +68,35 @@
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Range Harga</label>
                     <div class="flex items-center space-x-2">
-                        <input type="number" name="price_min" placeholder="Min (Rp)"
+                        <!-- Hidden raw values for form submission -->
+                        <input type="hidden" name="price_min" id="price_min_raw" value="{{ request('price_min') }}">
+                        <input type="hidden" name="price_max" id="price_max_raw" value="{{ request('price_max') }}">
+
+                        <!-- Visible formatted inputs -->
+                        <input type="text" id="price_min_formatted" placeholder="Min (Rp)"
+                               inputmode="numeric"
                                class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                               value="{{ request('price_min') }}">
+                               value="{{ request('price_min') ? number_format(request('price_min'), 0, '', '.') : '' }}"
+                               oninput="formatFilterCurrency(this, 'price_min_raw')" onchange="formatFilterCurrency(this, 'price_min_raw')">
                         <span class="text-gray-500 text-sm">s/d</span>
-                        <input type="number" name="price_max" placeholder="Max (Rp)"
+                        <input type="text" id="price_max_formatted" placeholder="Max (Rp)"
+                               inputmode="numeric"
                                class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary"
-                               value="{{ request('price_max') }}">
+                               value="{{ request('price_max') ? number_format(request('price_max'), 0, '', '.') : '' }}"
+                               oninput="formatFilterCurrency(this, 'price_max_raw')" onchange="formatFilterCurrency(this, 'price_max_raw')">
                     </div>
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Quick Filter</label>
-                    <select onchange="quickPriceFilter(this.value)" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary">
+                    <select id="quick-filter" onchange="quickPriceFilter(this.value)" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-admin-primary focus:border-admin-primary">
                         <option value="">Pilih Range</option>
-                        <option value="0-200000">< 200rb</option>
-                        <option value="200000-500000">200rb - 500rb</option>
-                        <option value="500000-1000000">500rb - 1jt</option>
-                        <option value="1000000-">> 1jt</option>
+                        <option value="0-200000" {{ request('price_min') == '0' && request('price_max') == '200000' ? 'selected' : '' }}>< 200rb</option>
+                        <option value="200000-500000" {{ request('price_min') == '200000' && request('price_max') == '500000' ? 'selected' : '' }}>200rb - 500rb</option>
+                        <option value="500000-1000000" {{ request('price_min') == '500000' && request('price_max') == '1000000' ? 'selected' : '' }}>500rb - 1jt</option>
+                        <option value="1000000-" {{ request('price_min') == '1000000' && empty(request('price_max')) ? 'selected' : '' }}>> 1jt</option>
                     </select>
                 </div>
             </div>
-
-            <script>
-                function quickPriceFilter(range) {
-                    if (!range) return;
-
-                    const [min, max] = range.split('-');
-                    const minInput = document.querySelector('input[name="price_min"]');
-                    const maxInput = document.querySelector('input[name="price_max"]');
-
-                    minInput.value = min || '';
-                    maxInput.value = max || '';
-                }
-            </script>
 
             <!-- Search Info Banner -->
             @if(request()->anyFilled(['search', 'category', 'price_min', 'price_max']))
@@ -117,7 +113,13 @@
                                     {{ $selectedCategory?->name }}
                                 @endif
                                 @if(request('price_min') || request('price_max'))
-                                    Rp {{ number_format(request('price_min', 0)) }} - Rp {{ number_format(request('price_max', 999999999)) }}
+                                    @if(request('price_min') && request('price_max'))
+                                        Rp {{ number_format(request('price_min')) }} - Rp {{ number_format(request('price_max')) }}
+                                    @elseif(request('price_min'))
+                                        > Rp {{ number_format(request('price_min')) }}
+                                    @else
+                                        < Rp {{ number_format(request('price_max')) }}
+                                    @endif
                                 @endif
                             </span>
                         </div>
@@ -262,8 +264,8 @@
 
         <!-- Pagination Links -->
         <div class="mt-6">
-            {{ $packages->withQueryString()->links() }}
-        </div>
+                {{ $packages->appends(request()->query())->links('vendor.pagination.custom-theme') }}
+            </div>
     </div>
 
     <!-- Delete Confirmation Modal -->
@@ -274,4 +276,92 @@
         Semua data termasuk galeri foto akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
     </x-delete-modal>
 </main>
+
+@push('scripts')
+<script>
+// Function to format currency for filter inputs
+function formatFilterCurrency(el, hiddenInputId) {
+    // Remove non-digit characters
+    let digits = el.value.replace(/\D/g, '');
+
+    // Update raw hidden input
+    document.getElementById(hiddenInputId).value = digits;
+
+    // Format for display
+    if (digits) {
+        el.value = new Intl.NumberFormat('id-ID').format(digits);
+    } else {
+        el.value = '';
+    }
+}
+
+function quickPriceFilter(range) {
+    if (!range) {
+        // Clear inputs when no range selected
+        document.getElementById('price_min_raw').value = '';
+        document.getElementById('price_max_raw').value = '';
+        document.getElementById('price_min_formatted').value = '';
+        document.getElementById('price_max_formatted').value = '';
+        return;
+    }
+
+    const [min, max] = range.split('-');
+    const minInput = document.getElementById('price_min_raw');
+    const maxInput = document.getElementById('price_max_raw');
+    const minFormatted = document.getElementById('price_min_formatted');
+    const maxFormatted = document.getElementById('price_max_formatted');
+
+    // Set raw values
+    minInput.value = min || '';
+    maxInput.value = max || '';
+
+    // Set formatted values
+    if (min) {
+        minFormatted.value = new Intl.NumberFormat('id-ID').format(min);
+    } else {
+        minFormatted.value = '';
+    }
+
+    if (max) {
+        maxFormatted.value = new Intl.NumberFormat('id-ID').format(max);
+    } else {
+        maxFormatted.value = '';
+    }
+}
+
+// Initialize formatting on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const priceMinFormatted = document.getElementById('price_min_formatted');
+    const priceMaxFormatted = document.getElementById('price_max_formatted');
+
+    if (priceMinFormatted && priceMinFormatted.value) {
+        formatFilterCurrency(priceMinFormatted, 'price_min_raw');
+    }
+    if (priceMaxFormatted && priceMaxFormatted.value) {
+        formatFilterCurrency(priceMaxFormatted, 'price_max_raw');
+    }
+
+    // Ensure form submission uses raw values
+    const filterForm = document.querySelector('form[method="GET"]');
+    if (filterForm) {
+        filterForm.addEventListener('submit', function(e) {
+            // Make sure hidden inputs have the correct raw values
+            const minFormatted = document.getElementById('price_min_formatted');
+            const maxFormatted = document.getElementById('price_max_formatted');
+
+            if (minFormatted) {
+                const minDigits = minFormatted.value.replace(/\D/g, '');
+                document.getElementById('price_min_raw').value = minDigits;
+            }
+
+            if (maxFormatted) {
+                const maxDigits = maxFormatted.value.replace(/\D/g, '');
+                document.getElementById('price_max_raw').value = maxDigits;
+            }
+        });
+    }
+});
+</script>
+@endpush
+
 @endsection

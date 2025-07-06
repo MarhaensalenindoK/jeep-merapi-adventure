@@ -61,16 +61,15 @@
                                 Gambar Utama Saat Ini
                             </label>
                             @if($post->featured_image)
-                                <div class="relative">
+                                <div class="relative cursor-pointer" onclick="openImageModal('{{ asset('storage/' . $post->featured_image) }}', '{{ $post->title }}')">
                                     <img src="{{ asset('storage/' . $post->featured_image) }}"
                                          alt="{{ $post->title }}"
-                                         class="w-full h-64 object-cover rounded-lg shadow-sm">
+                                         class="w-full h-64 object-cover rounded-lg shadow-sm hover:shadow-lg transition-shadow">
                                     <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
-                                        <a href="{{ asset('storage/' . $post->featured_image) }}" target="_blank"
-                                           class="opacity-0 hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-opacity shadow-lg">
-                                            <x-icon name="external-link" class="w-4 h-4 inline mr-2" />
-                                            Lihat Ukuran Penuh
-                                        </a>
+                                        <div class="opacity-0 hover:opacity-100 bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-opacity shadow-lg">
+                                            <x-icon name="eye" class="w-4 h-4 inline mr-2" />
+                                            Klik untuk melihat
+                                        </div>
                                     </div>
                                 </div>
                             @else
@@ -108,7 +107,7 @@
                                         <p class="text-xs text-gray-500">PNG, JPG, WebP hingga 15MB</p>
                                     </div>
                                     <div x-show="$store.post.imagePreview" class="relative">
-                                        <img :src="$store.post.imagePreview" class="mx-auto max-h-48 rounded-lg" alt="Preview">
+                                        <img :src="$store.post.imagePreview" class="mx-auto max-h-48 rounded-lg cursor-pointer hover:shadow-lg transition-shadow" alt="Preview" @click="$store.post.openPreviewModal()">
                                         <button @click="$store.post.clearPreview()" type="button"
                                                 class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors">
                                             <x-icon name="close" class="h-4 w-4" />
@@ -251,6 +250,46 @@
     </div>
 </main>
 
+<!-- Image Preview Modal -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onclick="closeImageModal()"></div>
+
+        <!-- Modal Content -->
+        <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <!-- Header -->
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalImageTitle">
+                        Preview Gambar
+                    </h3>
+                    <button type="button" onclick="closeImageModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <x-icon name="close" class="h-6 w-6" />
+                    </button>
+                </div>
+
+                <!-- Image Container -->
+                <div class="text-center">
+                    <img id="modalImage" src="" alt="" class="max-w-full max-h-96 mx-auto rounded-lg shadow-lg">
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <a id="modalImageLink" href="" target="_blank" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    <x-icon name="external-link" class="w-4 h-4 mr-2" />
+                    Lihat di Layar Penuh
+                </a>
+                <button type="button" onclick="closeImageModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
 <script>
 document.addEventListener('alpine:init', () => {
     Alpine.store('post', {
@@ -277,6 +316,12 @@ document.addEventListener('alpine:init', () => {
             this.imagePreview = null;
             const imageInput = document.getElementById('featured_image');
             if (imageInput) imageInput.value = '';
+        },
+
+        openPreviewModal() {
+            if (this.imagePreview) {
+                openImageModal(this.imagePreview, 'Preview Gambar');
+            }
         },
 
         handleFileDrop(event) {
@@ -364,5 +409,35 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('CKEditor error:', error);
         });
 });
+
+// Image Modal Functions
+function openImageModal(imageSrc, imageTitle) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageTitle = document.getElementById('modalImageTitle');
+    const modalImageLink = document.getElementById('modalImageLink');
+
+    modalImage.src = imageSrc;
+    modalImage.alt = imageTitle;
+    modalImageTitle.textContent = imageTitle || 'Preview Gambar';
+    modalImageLink.href = imageSrc;
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
 </script>
+@endpush
 @endsection
