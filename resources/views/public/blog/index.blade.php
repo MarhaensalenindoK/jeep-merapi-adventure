@@ -199,7 +199,7 @@
                    class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors">
                     Lihat Paket Wisata
                 </a>
-                <a href="https://wa.me/62818909769095?text=Halo,%20saya%20ingin%20mendapatkan%20info%20update%20terbaru%20dari%20Jeep%20Merapi%20Adventure"
+                <a href="https://wa.me/6281809769095?text=Halo,%20saya%20ingin%20mendapatkan%20info%20update%20terbaru%20dari%20Jeep%20Merapi%20Adventure"
                    target="_blank"
                    class="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-lg font-bold transition-colors">
                     Subscribe via WhatsApp

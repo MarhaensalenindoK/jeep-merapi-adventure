@@ -79,7 +79,7 @@
                                         <p class="text-xs text-gray-500">PNG, JPG, WebP hingga 15MB</p>
                                     </div>
                                     <div x-show="$store.post.imagePreview" class="relative">
-                                        <img :src="$store.post.imagePreview" class="mx-auto max-h-48 rounded-lg" alt="Preview">
+                                        <img :src="$store.post.imagePreview" class="mx-auto max-h-48 rounded-lg cursor-pointer hover:shadow-lg transition-shadow" alt="Preview" @click="$store.post.openPreviewModal()">
                                         <button @click="$store.post.clearPreview()" type="button"
                                                 class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors">
                                             <x-icon name="close" class="h-4 w-4" />
@@ -197,6 +197,42 @@
     </div>
 </main>
 
+<!-- Image Preview Modal -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onclick="closeImageModal()"></div>
+
+        <!-- Modal Content -->
+        <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <!-- Header -->
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalImageTitle">
+                        Preview Gambar
+                    </h3>
+                    <button type="button" onclick="closeImageModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <x-icon name="close" class="h-6 w-6" />
+                    </button>
+                </div>
+
+                <!-- Image Container -->
+                <div class="text-center">
+                    <img id="modalImage" src="" alt="" class="max-w-full max-h-96 mx-auto rounded-lg shadow-lg">
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" onclick="closeImageModal()" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto sm:text-sm">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
 <script>
 document.addEventListener('alpine:init', () => {
     Alpine.store('post', {
@@ -223,6 +259,12 @@ document.addEventListener('alpine:init', () => {
             this.imagePreview = null;
             const imageInput = document.getElementById('featured_image');
             if (imageInput) imageInput.value = '';
+        },
+
+        openPreviewModal() {
+            if (this.imagePreview) {
+                openImageModal(this.imagePreview, 'Preview Gambar');
+            }
         },
 
         handleFileDrop(event) {
@@ -310,5 +352,33 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('CKEditor error:', error);
         });
 });
+
+// Image Modal Functions for Create Page (Preview only)
+function openImageModal(imageSrc, imageTitle) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageTitle = document.getElementById('modalImageTitle');
+
+    modalImage.src = imageSrc;
+    modalImage.alt = imageTitle;
+    modalImageTitle.textContent = imageTitle || 'Preview Gambar';
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
 </script>
+@endpush
 @endsection

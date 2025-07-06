@@ -58,6 +58,9 @@ class PackageCategoryController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:package_categories',
             'description' => 'nullable|string',
+        ], [
+            'name.required' => 'Mohon isi Nama Kategori',
+            'name.unique'   => 'Nama kategori sudah digunakan',
         ]);
 
         // Tambahkan slug dan user id secara otomatis
@@ -95,6 +98,9 @@ class PackageCategoryController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:package_categories,name,' . $category->id,
             'description' => 'nullable|string',
+        ], [
+            'name.required' => 'Mohon isi Nama Kategori',
+            'name.unique'   => 'Nama kategori sudah digunakan',
         ]);
 
         // Tambahkan slug dan user id yang mengupdate

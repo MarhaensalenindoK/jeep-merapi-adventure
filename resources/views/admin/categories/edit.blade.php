@@ -28,12 +28,14 @@
                     Nama Kategori <span class="text-red-500">*</span>
                 </label>
                 <input type="text"
-                       name="name"
-                       id="name"
-                       class="admin-input @error('name') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
-                       value="{{ old('name', $category->name) }}"
-                       placeholder="Contoh: Paket Keluarga"
-                       required>
+                    name="name"
+                    id="name"
+                    class="admin-input @error('name') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+                    value="{{ old('name', $category->name) }}"
+                    placeholder="Contoh: Paket Keluarga"
+                    required
+                    oninvalid="this.setCustomValidity('Mohon isi Nama Kategori')"
+                    oninput="this.setCustomValidity('')">
                 @error('name')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror

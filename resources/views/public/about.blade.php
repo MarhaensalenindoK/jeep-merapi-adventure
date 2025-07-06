@@ -85,55 +85,57 @@
 </section>
 
 <!-- Key Features -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6" data-aos="fade-up">Mengapa Memilih Kami?</h2>
-            <p class="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="200">
-                Pengalaman bertahun-tahun dan komitmen terhadap keunggulan membuat kami menjadi pilihan terbaik.
+            <h2 class="text-3xl font-bold text-gray-800 mb-2" data-aos="fade-up">
+                Mengapa Memilih Kami?
+            </h2>
+            <p class="text-center text-gray-600" data-aos="fade-up" data-aos-delay="100">
+                Komitmen kami untuk memberikan pengalaman terbaik bagi petualangan Anda.
             </p>
         </div>
 
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Feature 1 -->
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="mb-4">
+                    <div class="inline-block p-4 bg-green-100 rounded-full">
+                        <x-icon name="shield-check" class="w-8 h-8 text-green-600" />
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Keamanan Terjamin</h3>
-                <p class="text-gray-600">Protokol keselamatan ketat dan pemandu berpengalaman</p>
+                <h3 class="text-xl font-bold mb-2">Jeep Sesuai Standar</h3>
+                <p class="text-gray-600">Armada kami telah memenuhi standar operasional dari Dishub Yogyakarta untuk keamanan Anda.</p>
             </div>
-
-            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+            <!-- Feature 2 -->
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="mb-4">
+                    <div class="inline-block p-4 bg-green-100 rounded-full">
+                        <x-icon name="user-group" class="w-8 h-8 text-green-600" />
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Pelayanan Prima</h3>
-                <p class="text-gray-600">Tim profesional siap melayani 24/7</p>
+                <h3 class="text-xl font-bold mb-2">Driver Berpengalaman</h3>
+                <p class="text-gray-600">Driver kami profesional, ramah, dan menguasai medan Merapi dengan sangat baik.</p>
             </div>
-
-            <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                    </svg>
+            <!-- Feature 3 -->
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                <div class="mb-4">
+                    <div class="inline-block p-4 bg-green-100 rounded-full">
+                        <x-icon name="language" class="w-8 h-8 text-green-600" />
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Berpengalaman</h3>
-                <p class="text-gray-600">Lebih dari 8 tahun melayani wisatawan</p>
+                <h3 class="text-xl font-bold mb-2">Driver Berbahasa Asing</h3>
+                <p class="text-gray-600">Beberapa driver kami mampu berkomunikasi dalam bahasa asing untuk melayani wisatawan mancanegara.</p>
             </div>
-
-            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
-                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                    </svg>
+            <!-- Feature 4 -->
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="500">
+                <div class="mb-4">
+                    <div class="inline-block p-4 bg-green-100 rounded-full">
+                        <x-icon name="sparkles" class="w-8 h-8 text-green-600" />
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Ramah Lingkungan</h3>
-                <p class="text-gray-600">Berkomitmen menjaga kelestarian alam Merapi</p>
+                <h3 class="text-xl font-bold mb-2">Fasilitas Lengkap</h3>
+                <p class="text-gray-600">Basecamp kami dekat dengan masjid dan memiliki area parkir yang luas dan aman.</p>
             </div>
         </div>
     </div>
