@@ -166,7 +166,7 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
                     <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
                     </svg>
@@ -179,7 +179,7 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                <div class="w-full h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
                     <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
                     </svg>
