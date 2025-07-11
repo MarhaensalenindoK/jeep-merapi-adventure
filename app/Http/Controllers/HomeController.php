@@ -36,12 +36,28 @@ class HomeController extends Controller
                 ->get();
         }
 
+        // Ambil galeri tambahan untuk slider (yang tidak featured)
+        $additionalGalleries = Gallery::where('is_featured', false)
+            ->with('package')
+            ->orderBy('created_at', 'desc')
+            ->take(20)
+            ->get();
+
+        // Fallback jika semua galeri featured
+        if ($additionalGalleries->isEmpty()) {
+            $additionalGalleries = Gallery::with('package')
+                ->whereNotIn('id', $featuredGalleries->pluck('id'))
+                ->orderBy('created_at', 'desc')
+                ->take(20)
+                ->get();
+        }
+
         $latestPosts = Post::where('is_published', true)
             ->orderBy('updated_at', 'desc')
             ->take(3)
             ->get();
 
-        return view('public.home', compact('featuredPackages', 'featuredGalleries', 'latestPosts'));
+        return view('public.home', compact('featuredPackages', 'featuredGalleries', 'additionalGalleries', 'latestPosts'));
     }
 
     /**

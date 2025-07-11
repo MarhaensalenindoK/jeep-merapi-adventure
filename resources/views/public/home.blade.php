@@ -175,13 +175,19 @@
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $package->name }}</h3>
                     <p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit(strip_tags($package->description), 120) }}</p>
 
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-2xl font-bold text-green-600">
-                            Rp {{ number_format($package->price, 0, ',', '.') }}
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-400 line-through">
+                            Rp {{ number_format($package->original_price, 0, ',', '.') }}
                         </div>
-                        <div class="text-sm text-gray-500">
-                            / {{ $package->duration }}
+                        <div class="text-lg font-bold text-green-600">
+                            Rp {{ number_format($package->promo_price, 0, ',', '.') }}
                         </div>
+                        <div class="text-xs bg-red-500 text-white px-2 py-1 rounded-full inline-block mt-1">
+                            Hemat {{ $package->discount_percentage }}%
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500 mb-4">
+                        / {{ $package->duration }}
                     </div>
 
                     <a href="{{ route('packages.show', $package) }}"
@@ -251,6 +257,70 @@
             <a href="{{ route('gallery.index') }}"
                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center">
                 Lihat Galeri Lengkap
+                <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Gallery Slider Section -->
+@if($additionalGalleries->count() > 0)
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Galeri Lengkap
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Jelajahi lebih banyak momen perjalanan wisata kami dalam galeri lengkap ini.
+            </p>
+        </div>
+
+        <!-- Swiper Slider -->
+        <div class="relative" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper gallerySwiper">
+                <div class="swiper-wrapper">
+                    @foreach($additionalGalleries as $gallery)
+                        @if(file_exists(public_path('storage/' . $gallery->image_path)))
+                        <div class="swiper-slide">
+                            <div class="relative group overflow-hidden rounded-lg aspect-[4/3] cursor-pointer">
+                                <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                     alt="{{ $gallery->alt_text ?? $gallery->title }}"
+                                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                                    <div class="opacity-0 group-hover:opacity-100 text-white text-center transition-opacity">
+                                        <svg class="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <p class="text-sm font-medium">{{ $gallery->title }}</p>
+                                        @if($gallery->package)
+                                            <p class="text-xs text-gray-300">{{ $gallery->package->name }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next !text-green-600 !bg-white !bg-opacity-80 !rounded-full !w-10 !h-10 after:!text-sm !shadow-lg"></div>
+            <div class="swiper-button-prev !text-green-600 !bg-white !bg-opacity-80 !rounded-full !w-10 !h-10 after:!text-sm !shadow-lg"></div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination !bottom-[-50px]"></div>
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="{{ route('gallery.index') }}"
+               class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center">
+                Jelajahi Semua Galeri
                 <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
                 </svg>
@@ -349,7 +419,6 @@
                                 class="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all z-10">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                            </svg>
                         </button>
                     </div>
 
@@ -384,76 +453,53 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
     const text = "Rasakan pengalaman tak terlupakan dengan paket wisata Jeep Merapi terpercaya. Nikmati pemandangan spektakuler dan petualangan seru bersama pemandu berpengalaman.";
     const typewriterElement = document.getElementById('typewriter-text');
-    let index = 0;
 
-    function typeWriter() {
-        if (index < text.length) {
-            typewriterElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeWriter, 50); // Adjust speed here (milliseconds)
-        } else {
-            // Add blinking cursor effect
-            typewriterElement.innerHTML += '<span class="animate-pulse">|</span>';
-        }
-    }
+    if (typewriterElement) {
+        typewriterElement.textContent = '';
+        let index = 0;
 
-    // Start typewriter effect after a small delay
-    setTimeout(typeWriter, 1000);
-
-    // Parallax effect for hero section
-    const heroSection = document.querySelector('.relative.bg-gradient-to-r');
-    const heroBackground = heroSection?.querySelector('.absolute.inset-0');
-
-    // Smooth scroll animations - only for upper sections
-    const upperSections = document.querySelectorAll('section:nth-of-type(-n+4)'); // First 4 sections only
-
-    function handleScroll() {
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-
-        // Parallax effect for hero background
-        if (heroBackground && scrollY < windowHeight) {
-            const parallaxSpeed = 0.5;
-            heroBackground.style.transform = `translateY(${scrollY * parallaxSpeed}px)`;
-        }
-
-        // Fade in/out effects for upper sections only
-        upperSections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            const isVisible = rect.top < windowHeight && rect.bottom > 0;
-
-            if (isVisible && scrollY < windowHeight * 3) { // Only apply to first 3 viewport heights
-                const opacity = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
-                const translateY = Math.max(0, (rect.top - windowHeight) * 0.1);
-
-                section.style.opacity = opacity;
-                section.style.transform = `translateY(${translateY}px)`;
-            } else if (scrollY >= windowHeight * 3) {
-                // Reset styles for lower sections to ensure smooth browsing
-                section.style.opacity = '';
-                section.style.transform = '';
+        function typeWriter() {
+            if (index < text.length) {
+                typewriterElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            } else {
+                typewriterElement.innerHTML += '<span class="animate-pulse">|</span>';
             }
-        });
-    }
-
-    // Throttled scroll event
-    let ticking = false;
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(function() {
-                handleScroll();
-                ticking = false;
-            });
-            ticking = true;
         }
+        setTimeout(typeWriter, 1000);
     }
 
-    window.addEventListener('scroll', onScroll);
+    // Kode Swiper Anda (tetap di sini)
+    const gallerySwiper = new Swiper('.gallerySwiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            768: { slidesPerView: 3, spaceBetween: 30 },
+            1024: { slidesPerView: 4, spaceBetween: 30 },
+        },
+    });
 
-    // Initial call
-    handleScroll();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
 });
 </script>
 @endpush

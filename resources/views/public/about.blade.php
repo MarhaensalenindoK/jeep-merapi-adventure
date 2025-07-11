@@ -21,63 +21,20 @@
     </div>
 </section>
 
-<!-- Company Story -->
+<!-- Tentang Kami -->
 <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Perjalanan Kami</h2>
-                    <p class="text-gray-600 mb-4">
-                        Jeep Merapi Adventure didirikan dengan misi sederhana: memberikan pengalaman wisata Gunung Merapi yang tak terlupakan dengan standar keamanan tertinggi. Sejak tahun 2015, kami telah melayani ribuan wisatawan dari berbagai negara.
-                    </p>
-                    <p class="text-gray-600 mb-4">
-                        Dengan tim pemandu berpengalaman dan armada jeep yang terawat, kami berkomitmen menjadi partner terpercaya dalam setiap petualangan Anda menjelajahi keindahan Gunung Merapi.
-                    </p>
-                    <p class="text-gray-600">
-                        Keamanan wisatawan adalah prioritas utama kami. Setiap perjalanan dilaksanakan dengan protokol keselamatan yang ketat dan dipimpin oleh pemandu lokal yang menguasai medan dan kondisi gunung.
-                    </p>
-                </div>
-                <div data-aos="fade-left">
-                    <img src="{{ asset('banner.JPG') }}"
-                         alt="Tim Jeep Merapi Adventure"
-                         class="rounded-lg shadow-lg">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Mission & Vision -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6" data-aos="fade-up">Visi & Misi</h2>
-        </div>
-
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-green-600 mb-4">
-                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Visi</h3>
-                <p class="text-gray-600">
-                    Menjadi penyedia layanan wisata Gunung Merapi terdepan yang memberikan pengalaman petualangan aman, berkesan, dan berkelanjutan bagi setiap wisatawan.
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-aos="fade-up">Tentang Kami</h2>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-gray-600 mb-4 text-lg leading-relaxed">
+                    Jeep Merapi Adventure didirikan dengan misi sederhana: memberikan pengalaman wisata Gunung Merapi yang tak terlupakan dengan standar keamanan tertinggi. Sejak tahun 2015, kami telah melayani ribuan wisatawan dari berbagai negara.
                 </p>
-            </div>
-
-            <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-green-600 mb-4">
-                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Misi</h3>
-                <p class="text-gray-600">
-                    Memberikan layanan wisata Merapi yang profesional, aman, dan berkualitas tinggi sambil menjaga kelestarian alam dan memberdayakan masyarakat lokal.
+                <p class="text-gray-600 mb-4 text-lg leading-relaxed">
+                    Dengan tim pemandu berpengalaman dan armada jeep yang terawat, kami berkomitmen menjadi partner terpercaya dalam setiap petualangan Anda menjelajahi keindahan Gunung Merapi.
+                </p>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    Keamanan wisatawan adalah prioritas utama kami. Setiap perjalanan dilaksanakan dengan protokol keselamatan yang ketat dan dipimpin oleh pemandu lokal yang menguasai medan dan kondisi gunung.
                 </p>
             </div>
         </div>
@@ -136,59 +93,6 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">Fasilitas Lengkap</h3>
                 <p class="text-gray-600">Basecamp kami dekat dengan masjid dan memiliki area parkir yang luas dan aman.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Section -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6" data-aos="fade-up">Tim Profesional</h2>
-            <p class="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="200">
-                Dipimpin oleh para ahli yang menguasai medan dan berpengalaman puluhan tahun.
-            </p>
-        </div>
-
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Budi Santoso</h3>
-                    <p class="text-green-600 font-medium mb-3">Founder & Head Guide</p>
-                    <p class="text-gray-600">Pendiri dengan pengalaman 15 tahun sebagai pemandu Merapi. Menguasai seluruh rute dan kondisi gunung.</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Andi Wijaya</h3>
-                    <p class="text-green-600 font-medium mb-3">Operations Manager</p>
-                    <p class="text-gray-600">Bertanggung jawab atas operasional harian dan memastikan standar pelayanan terbaik untuk setiap wisatawan.</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white opacity-70" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sari Lestari</h3>
-                    <p class="text-green-600 font-medium mb-3">Customer Service</p>
-                    <p class="text-gray-600">Siap membantu perencanaan perjalanan Anda dengan informasi lengkap dan pelayanan yang ramah.</p>
-                </div>
             </div>
         </div>
     </div>

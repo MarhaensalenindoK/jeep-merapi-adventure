@@ -169,6 +169,10 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm font-medium text-gray-900">Rp {{ number_format($package->price) }}</div>
+                            <div class="text-xs text-gray-500 mt-1">
+                                Promo: <span class="line-through">Rp {{ number_format($package->original_price) }}</span>
+                                → <span class="text-green-600 font-medium">Rp {{ number_format($package->promo_price) }}</span>
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->duration }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->created_at ? $package->created_at->format('d M Y') : '-' }}</td>
@@ -221,6 +225,10 @@
                         <div>
                             <div class="text-gray-500">Harga</div>
                             <div class="font-medium text-admin-primary">Rp {{ number_format($package->price) }}</div>
+                            <div class="text-xs text-gray-500 mt-1">
+                                Promo: <span class="line-through">Rp {{ number_format($package->original_price) }}</span>
+                                → <span class="text-green-600 font-medium">Rp {{ number_format($package->promo_price) }}</span>
+                            </div>
                         </div>
                         <div>
                             <div class="text-gray-500">Durasi</div>

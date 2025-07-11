@@ -124,8 +124,16 @@
                             @endif
 
                             @if($package->price)
-                            <div class="text-lg font-bold text-green-600">
-                                Rp {{ number_format($package->price, 0, ',', '.') }}
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="text-lg text-gray-400 line-through">
+                                    Rp {{ number_format($package->original_price, 0, ',', '.') }}
+                                </span>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded">
+                                    Hemat {{ $package->discount_percentage }}%
+                                </span>
+                            </div>
+                            <div class="text-2xl font-bold text-green-600">
+                                Rp {{ number_format($package->promo_price, 0, ',', '.') }}
                             </div>
                             @endif
                         </div>

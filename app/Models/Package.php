@@ -87,4 +87,34 @@ class Package extends Model
     {
         return 'slug';
     }
+
+    /**
+     * Mendapatkan harga original untuk tampilan promo (harga + 50rb)
+     *
+     * @return int
+     */
+    public function getOriginalPriceAttribute()
+    {
+        return $this->price + 50000;
+    }
+
+    /**
+     * Mendapatkan harga promo (harga sebenarnya)
+     *
+     * @return int
+     */
+    public function getPromoPriceAttribute()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Mendapatkan persentase diskon
+     *
+     * @return float
+     */
+    public function getDiscountPercentageAttribute()
+    {
+        return round((50000 / $this->original_price) * 100, 1);
+    }
 }
